@@ -22,6 +22,7 @@ class Toilet(models.Model):
     gender = models.CharField(max_length=1,
                               choices=SEX_CHOICES,
                               default=MALE)
+    created = models.DateTimeField()
     single_occupancy = models.BooleanField()
     accesible = models.BooleanField()
     station = models.BooleanField()
