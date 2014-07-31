@@ -1,0 +1,10 @@
+#map { height: 180px; }
+
+ body {
+    background-color: #d0e4fe;
+}
+
+h1 {
+    color: orange;
+    text-align: center;
+}

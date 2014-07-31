@@ -38,7 +38,10 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.gis',
     'south',
-    'lavoratr'
+    'lavoratr',
+    'djgeojson',
+    'rest_framework',
+
 )
 
 MIDDLEWARE_CLASSES = (

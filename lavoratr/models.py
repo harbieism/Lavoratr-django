@@ -4,18 +4,19 @@ from django.core.exceptions import ValidationError
 
 def validate_rating(value):
     if value < 1 or value > 10:
-        raise ValidationError(u'%s is not a valid rating!' % value)
+        raise ValidationError('%s is not a valid rating!' % value)
+
+MALE = 'M'
+FEMALE = 'F'
+UNISEX = 'U'
+SEX_CHOICES = (
+    (MALE, 'Male'),
+    (FEMALE, 'Female'),
+    (UNISEX, 'Unisex'),
+)
 
 
 class Toilet(models.Model):
-    MALE = 'M'
-    FEMALE = 'F'
-    UNISEX = 'U'
-    SEX_CHOICES = (
-        (MALE, 'Male'),
-        (FEMALE, 'Female'),
-        (UNISEX, 'Unisex'),
-    )
     location = models.CharField(max_length=50)
     building = models.CharField(max_length=50)
     rating = models.IntegerField(validators=[validate_rating])
@@ -34,4 +35,4 @@ class Toilet(models.Model):
     objects = models.GeoManager()
 
     def __unicode__(self):
-        return self.name
+        return (str(self.location) + ', ' + str(self.building))
