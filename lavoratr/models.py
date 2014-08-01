@@ -30,6 +30,7 @@ class Toilet(models.Model):
     comment_box = models.CharField(max_length=127, blank=True)
     lon = models.FloatField()
     lat = models.FloatField()
+    times_rated = models.FloatField(default=0)
 
     point = models.PointField()
     objects = models.GeoManager()
