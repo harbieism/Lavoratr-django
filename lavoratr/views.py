@@ -1,12 +1,11 @@
 from django.shortcuts import render, get_object_or_404
-from django.template import RequestContext, loader
 from lavoratr.models import Toilet
 from lavoratr.serializers import ToiletSerializer
 from rest_framework.renderers import JSONRenderer
 
 
 def index(request):
-    latest_toilet_list = Toilet.objects.order_by('-created')[:5]
+    latest_toilet_list = Toilet.objects.all()
     serializer = ToiletSerializer(latest_toilet_list)
     toilets_json = JSONRenderer().render(serializer.data)
     context = {
