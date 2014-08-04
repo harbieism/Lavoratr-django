@@ -1,4 +1,13 @@
 var map = L.map('map');
+mapLink =
+    '<a href="http://openstreetmap.org">OpenStreetMap</a>';
+L.tileLayer(
+        'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'Map data &copy; ' + mapLink,
+            maxZoom: 18,
+        })
+    .addTo(map);
+
 function onLocationFound(e) {
     var radius = e.accuracy / 2;
 
@@ -9,14 +18,7 @@ function onLocationFound(e) {
 }
 map.on('locationfound', onLocationFound);
 map.locate({setView: true, maxZoom: 16});
-mapLink =
-    '<a href="http://openstreetmap.org">OpenStreetMap</a>';
-L.tileLayer(
-        'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: 'Map data &copy; ' + mapLink,
-            maxZoom: 18,
-        })
-    .addTo(map);
+
 
 
 function onEachFeature(feature, layer) {
