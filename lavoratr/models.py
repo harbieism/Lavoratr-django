@@ -27,13 +27,20 @@ class Toilet(models.Model):
     single_occupancy = models.BooleanField()
     accesible = models.BooleanField()
     station = models.BooleanField()
-    comment_box = models.CharField(max_length=127, blank=True)
     lon = models.FloatField()
     lat = models.FloatField()
     times_rated = models.FloatField(default=0)
+    times_authenticated = models.FloatField(default=0)
 
     point = models.PointField()
     objects = models.GeoManager()
 
     def __unicode__(self):
         return (str(self.location) + ', ' + str(self.building))
+
+
+class Review(models.Model):
+    toilet = models.ForeignKey(Toilet)
+    rating = models.IntegerField(validators=[validate_rating])
+    comment_box = models.CharField(max_length=127, blank=True)
+
