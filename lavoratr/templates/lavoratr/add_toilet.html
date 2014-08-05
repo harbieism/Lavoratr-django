@@ -1,1 +1,21 @@
-<h1>Test</h1>
+<h1>Add a Restroom</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'lavoratr:submit_toilet' %}" method="post">
+{% csrf_token %}
+    Location of Restroom in Building:
+    <input type="text" name="location" id="location"><br>
+    Building: 
+    <input type="text" name="building" id="building"><br>
+
+    <input type="range" name="rating" id="rating" min="1" max="10"><br>
+    <input type="radio" name="gender" value="Male">Male<br>
+    <input type="radio" name="gender" value="Female">Female<br>
+    <input type="radio" name="gender" value="Unisex">Unisex<br>
+    <input type="checkbox" name="single_occupancy" id="single_occupancy"><br>
+    <input type="checkbox" name="accesible" id="accesible"><br>
+    <input type="station" name="station" id="station"><br>
+    <input type="comment_box" name="comment_box" id="comment_box">
+<input type="submit" value="Toilet" />
+</form>

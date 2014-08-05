@@ -23,3 +23,6 @@ def detail(request, toilet_id):
 def add_toilet(request, lat, lng):
     newLatLng = [lat, lng]
     return render(request, 'lavoratr/add_toilet.html', {'newLatLng': newLatLng})
+
+def submit_toilet(request):
+    return None

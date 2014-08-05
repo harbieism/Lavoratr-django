@@ -11,4 +11,9 @@ urlpatterns = patterns(
         model=Toilet
     ), name='data'),
     url(r'^add_toilet/(?P<lat>-?\d+\.\d+)/(?P<lng>-?\d+\.\d+)/$', views.add_toilet, name='add_toilet'),
+    url(
+    	r'^submit_toilet/$',
+    	views.submit_toilet,
+    	name='submit_toilet'
+    ),
 )
