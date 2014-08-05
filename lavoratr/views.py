@@ -18,3 +18,8 @@ def index(request):
 def detail(request, toilet_id):
     toilet = get_object_or_404(Toilet, id=toilet_id)
     return render(request, 'lavoratr/detail.html', {'toilet': toilet})
+
+
+def add_toilet(request, lat, lng):
+    newLatLng = [lat, lng]
+    return render(request, 'lavoratr/add_toilet.html', {'newLatLng': newLatLng})

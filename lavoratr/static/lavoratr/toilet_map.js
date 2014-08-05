@@ -10,15 +10,31 @@ L.tileLayer(
 
 function onLocationFound(e) {
     var radius = e.accuracy / 2;
+    var lat = e.latlng.lat;
+    var lng = e.latlng.lng;
+    $('#lat').val(parseFloat(lat.toString()));
+    $('#lng').val(parseFloat(lng.toString()));
 
-    L.marker(e.latlng).addTo(map)
-        .bindPopup("You are within " + radius + " meters from this point").openPopup();
-
+    var userMarker = L.marker(e.latlng, {draggable: true}).addTo(map)
+        .bindPopup(lat.toString()).openPopup();
+    
     L.circle(e.latlng, radius).addTo(map);
+
+    userMarker.on('dragend', function(e){
+        var coords = e.target.getLatLng();
+        lat = coords.lat;
+        lng = coords.lng;
+        $('#lat').val(parseFloat(lat.toString()));
+        $('#lng').val(parseFloat(lng.toString()));
+
+    });
+
+    $('#add_toilet').click(function (event) {
+        window.location="add_toilet/" + lat + "/" + lng + "/";
+    });
 }
 map.on('locationfound', onLocationFound);
 map.locate({setView: true, maxZoom: 16});
-
 
 
 function onEachFeature(feature, layer) {

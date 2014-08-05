@@ -15,10 +15,20 @@
 </head>
 
 <body>
+    <div>
+        <input type="text" id="lat" name="lat"/>
+        <input type="text" id="lng" name="lng"/>
+    </div>
     <div id="map_border">
         <div id="map"></div>
         <button id="add_toilet" type="button">Add a Toilet</button>
 
+    </div>
+    <div>    
+        <form id="dialogform" style="display: none">
+            <input type="hidden" id="point" name="point"/>
+            <input type="text" id="other" name="other"/>
+        </form>
     </div>
     <script src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js">
     </script>
