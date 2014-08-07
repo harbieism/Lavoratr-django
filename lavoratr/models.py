@@ -48,4 +48,3 @@ class Review(models.Model):
 
     def __unicode__(self):
         return (str(self.toilet) + ': ' + str(self.rating))
-

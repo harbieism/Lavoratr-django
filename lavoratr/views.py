@@ -1,12 +1,10 @@
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from django.contrib.gis.geos import Point, GEOSGeometry
-from django.core.urlresolvers import reverse
 from lavoratr.models import Toilet, Review
 from lavoratr.serializers import ToiletSerializer
 from lavoratr.forms import ToiletForm
 from rest_framework.renderers import JSONRenderer
-
 
 
 def index(request):
@@ -29,25 +27,28 @@ def add_toilet(request, lat, lng):
     float_lat = float(lat)
     float_lng = float(lng)
     point = Point(float_lat, float_lng)
-    return render(request, 'lavoratr/add_toilet.html', {'form':ToiletForm, 'point': point.hex})
+    return render(
+        request, 'lavoratr/add_toilet.html',
+        {'form': ToiletForm, 'point': point.hex}
+    )
+
 
 def submit_toilet(request):
-    if request.POST['single_occupancy']:
+    if 'single_occupancy' in request.POST:
         single_occupancy_bool = True
     else:
         single_occupancy_bool = False
 
-    if request.POST['accesible']:
+    if 'accesible' in request.POST:
         accesible_bool = True
     else:
         accesible_bool = False
 
-    if request.POST['station']:
+    if 'station' in request.POST:
         station_bool = True
     else:
         station_bool = False
-     
-     
+
     current_time = timezone.now()
     new_toilet = Toilet.objects.create(
         location=request.POST['location'],
@@ -63,15 +64,15 @@ def submit_toilet(request):
         point=GEOSGeometry(request.POST['point'])
     )
     new_toilet.save()
-    
+
     new_id = new_toilet.id
     new_toilet = Toilet.objects.get(id=new_id)
-    
+
     new_review = Review.objects.create(
         toilet=new_toilet,
         rating=request.POST['rating'],
         comment_box=request.POST['comment_box'],
-        created=current_time,        
+        created=current_time,
     )
     new_review.save()
 
