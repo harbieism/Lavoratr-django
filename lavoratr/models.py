@@ -31,11 +31,8 @@ class Toilet(models.Model):
     station = models.BooleanField(
         default=False, verbose_name='Changing Station'
     )
-    lon = models.FloatField()
-    lat = models.FloatField()
     times_rated = models.FloatField(default=0)
     times_authenticated = models.FloatField(default=0)
-
     point = models.PointField()
     objects = models.GeoManager()
 

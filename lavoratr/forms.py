@@ -23,7 +23,7 @@ class ToiletForm(ModelForm):
     class Meta:
         model = Toilet
         exclude = [
-            'created', 'lon', 'lat', 'times_rated', 'times_authenticated',
+            'created', 'times_rated', 'times_authenticated',
             'point',
         ]
 

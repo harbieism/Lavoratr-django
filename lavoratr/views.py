@@ -55,11 +55,9 @@ def submit_toilet(request):
         rating=request.POST['rating'],
         gender=request.POST['gender'],
         created=current_time,
-        single_occupancy=single_occupancy_bool
-        accesible=accesible_bool
-        station=station_bool
-        lon=request.POST['lng'],
-        lat=request.POST['lat'],
+        single_occupancy=single_occupancy_bool,
+        accesible=accesible_bool,
+        station=station_bool,
         times_rated=1,
         times_authenticated=1,
         point=GEOSGeometry(request.POST['point'])
