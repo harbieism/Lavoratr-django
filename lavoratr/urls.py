@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, url
 from lavoratr import views
 from djgeojson.views import GeoJSONLayerView
-from lavoratr.models import Toilet
+from lavoratr.models import Toilet, Review
 
 urlpatterns = patterns(
     '',
@@ -11,9 +11,5 @@ urlpatterns = patterns(
         model=Toilet
     ), name='data'),
     url(r'^add_toilet/(?P<lat>-?\d+\.\d+)/(?P<lng>-?\d+\.\d+)/$', views.add_toilet, name='add_toilet'),
-    url(
-    	r'^submit_toilet/$',
-    	views.submit_toilet,
-    	name='submit_toilet'
-    ),
+    url(r'^submit_toilet/$',views.submit_toilet,name='submit_toilet'),
 )

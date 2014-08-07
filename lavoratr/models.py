@@ -17,16 +17,20 @@ SEX_CHOICES = (
 
 
 class Toilet(models.Model):
-    location = models.CharField(max_length=50)
+    location = models.CharField(
+        max_length=50, verbose_name="Location in Building"
+    )
     building = models.CharField(max_length=50)
-    rating = models.IntegerField(validators=[validate_rating])
+    rating = models.IntegerField()
     gender = models.CharField(max_length=1,
                               choices=SEX_CHOICES,
                               default=MALE)
     created = models.DateTimeField()
-    single_occupancy = models.BooleanField()
-    accesible = models.BooleanField()
-    station = models.BooleanField()
+    single_occupancy = models.BooleanField(default=False)
+    accesible = models.BooleanField(default=False)
+    station = models.BooleanField(
+        default=False, verbose_name='Changing Station'
+    )
     lon = models.FloatField()
     lat = models.FloatField()
     times_rated = models.FloatField(default=0)
@@ -43,4 +47,8 @@ class Review(models.Model):
     toilet = models.ForeignKey(Toilet)
     rating = models.IntegerField(validators=[validate_rating])
     comment_box = models.CharField(max_length=127, blank=True)
+    created = models.DateTimeField()
+
+    def __unicode__(self):
+        return (str(self.toilet) + ': ' + str(self.rating))
 
