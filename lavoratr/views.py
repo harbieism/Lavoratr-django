@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
-from django.contrib.gis.geos import Point
+from django.contrib.gis.geos import Point, GEOSGeometry
 from django.core.urlresolvers import reverse
 from lavoratr.models import Toilet, Review
 from lavoratr.serializers import ToiletSerializer
@@ -32,6 +32,22 @@ def add_toilet(request, lat, lng):
     return render(request, 'lavoratr/add_toilet.html', {'form':ToiletForm, 'point': point.hex})
 
 def submit_toilet(request):
+    if request.POST['single_occupancy']:
+        single_occupancy_bool = True
+    else:
+        single_occupancy_bool = False
+
+    if request.POST['accesible']:
+        accesible_bool = True
+    else:
+        accesible_bool = False
+
+    if request.POST['station']:
+        station_bool = True
+    else:
+        station_bool = False
+     
+     
     current_time = timezone.now()
     new_toilet = Toilet.objects.create(
         location=request.POST['location'],
@@ -39,14 +55,14 @@ def submit_toilet(request):
         rating=request.POST['rating'],
         gender=request.POST['gender'],
         created=current_time,
-        single_occupancy=request.POST['single_occupancy'],
-        accesible=request.POST['accesible'],
-        station=request.POST['station'],
+        single_occupancy=single_occupancy_bool
+        accesible=accesible_bool
+        station=station_bool
         lon=request.POST['lng'],
         lat=request.POST['lat'],
         times_rated=1,
         times_authenticated=1,
-        point=Point(request.POST['lat'], request.POST['lng'])
+        point=GEOSGeometry(request.POST['point'])
     )
     new_toilet.save()
     
