@@ -1,11 +1,16 @@
 var southWest = new L.LatLng(-85.0, -180.0);
 var northEast = new L.LatLng(85.0, 180.0);
 var restrictBounds = new L.LatLngBounds(southWest, northEast);
+
 var mapOptions = {
     maxBounds: restrictBounds
 };
+
+
 var map = L.map('map', mapOptions);
 map.options.minZoom = 3;
+
+
 mapLink =
     '<a href="http://openstreetmap.org">OpenStreetMap</a>';
 L.tileLayer(
@@ -14,10 +19,25 @@ L.tileLayer(
             maxZoom: 17,
         })
     .addTo(map);
+
+
 L.geoJson($data, {
-        onEachFeature: onEachFeature
-    })
-    .addTo(map);
+    onEachFeature: onEachFeature
+}).addTo(map);
+
+
+map.on('locationfound', onLocationFound);
+map.locate({setView: true, maxZoom: 17});
+
+var style = {
+
+}
+
+function onEachFeature(feature, layer) {
+    // does this feature have a property named popupContent?
+    var link = ('<a href=/lavoratr/detail/' + feature.properties.id + '/ >detail</a>');
+    layer.bindPopup(link);
+}
 
 function onLocationFound(e) {
     var radius = e.accuracy / 2;
@@ -44,14 +64,3 @@ function onLocationFound(e) {
         window.location="add_toilet/" + lat + "/" + lng + "/";
     });
 }
-map.on('locationfound', onLocationFound);
-map.locate({setView: true, maxZoom: 17});
-
-
-
-function onEachFeature(feature, layer) {
-    // does this feature have a property named popupContent?
-    var link = ('<a href=/lavoratr/detail/' + feature.properties.id + '/ >detail</a>');
-    layer.bindPopup(link);
-}
-

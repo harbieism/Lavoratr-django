@@ -2,6 +2,7 @@ from django.forms import ModelForm
 from lavoratr.models import Toilet
 from django import forms
 from django.contrib.gis import forms as GeoForms
+from django.core.exceptions import ValidationError
 
 MALE = 'M'
 FEMALE = 'F'
@@ -15,6 +16,7 @@ SEX_CHOICES = (
 
 class ToiletForm(ModelForm):
     point = GeoForms.PointField(widget=forms.HiddenInput())
+    rating = forms.IntegerField(min_value=1, max_value=10)
     single_occupancy = forms.BooleanField(required=False)
     accesible = forms.BooleanField(required=False)
     station = forms.BooleanField(required=False)
