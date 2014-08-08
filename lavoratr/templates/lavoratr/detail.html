@@ -1,4 +1,22 @@
+<html>
+
+<head>
+	<title>Lavoratr Toilet #{{ toilet.id }}</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+</head>
 <h1>{{  toilet.location  }}, {{  toilet.building  }}</h1>
 <body>
-    <p>Rating: {{  toilet.rating  }}/10</p>
+	<div><p id="rating"></p></div>
+	<script>
+		var $rating = {{ toilet.rating }};
+	    var $times_rated = {{ toilet.times_rated }};
+        $( document ).ready(function() {
+            var real_rating = $rating / $times_rated;
+            document.getElementById("rating").innerHTML = real_rating;
+        });
+    </script>
+	<script>
+
+	</script>
 </body>
+</html>

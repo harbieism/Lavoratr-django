@@ -5,7 +5,7 @@ from lavoratr.models import Toilet, Review
 from lavoratr.serializers import ToiletSerializer
 from lavoratr.forms import ToiletForm
 from rest_framework.renderers import JSONRenderer
-
+from django.views import generic
 
 def index(request):
     latest_toilet_list = Toilet.objects.all()
@@ -26,7 +26,7 @@ def detail(request, toilet_id):
 def add_toilet(request, lat, lng):
     float_lat = float(lat)
     float_lng = float(lng)
-    point = Point(float_lat, float_lng)
+    point = Point(float_lng, float_lat)
     return render(
         request, 'lavoratr/add_toilet.html',
         {'form': ToiletForm, 'point': point.hex}

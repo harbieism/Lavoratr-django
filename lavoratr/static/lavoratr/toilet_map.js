@@ -1,11 +1,22 @@
-var map = L.map('map');
+var southWest = new L.LatLng(-85.0, -180.0);
+var northEast = new L.LatLng(85.0, 180.0);
+var restrictBounds = new L.LatLngBounds(southWest, northEast);
+var mapOptions = {
+    maxBounds: restrictBounds
+};
+var map = L.map('map', mapOptions);
+map.options.minZoom = 3;
 mapLink =
     '<a href="http://openstreetmap.org">OpenStreetMap</a>';
 L.tileLayer(
         'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: 'Map data &copy; ' + mapLink,
-            maxZoom: 18,
+            maxZoom: 17,
         })
+    .addTo(map);
+L.geoJson($data, {
+        onEachFeature: onEachFeature
+    })
     .addTo(map);
 
 function onLocationFound(e) {
@@ -34,7 +45,8 @@ function onLocationFound(e) {
     });
 }
 map.on('locationfound', onLocationFound);
-map.locate({setView: true, maxZoom: 16});
+map.locate({setView: true, maxZoom: 17});
+
 
 
 function onEachFeature(feature, layer) {
@@ -43,7 +55,3 @@ function onEachFeature(feature, layer) {
     layer.bindPopup(link);
 }
 
-L.geoJson($data, {
-        onEachFeature: onEachFeature
-    })
-    .addTo(map);
