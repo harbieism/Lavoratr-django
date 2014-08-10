@@ -8,6 +8,37 @@ L.tileLayer(
         })
     .addTo(map);
 
+
+L.geoJson($data, {
+    onEachFeature: onEachFeature
+}).addTo(map);
+
+
+map.on('locationfound', onLocationFound);
+map.locate({setView: true, maxZoom: 17});
+
+
+function onEachFeature(feature, layer) {
+    if (feature.properties) {
+        var popupString = '<div class="popup">';
+        for (var k in feature.properties) {
+            var v = feature.properties[k];
+            popupString += k + ': ' + v + '<br />';
+        }
+        popupString += '</div>';
+        layer.bindPopup(popupString);
+    }
+    if (!(layer instanceof L.Point)) {
+        layer.on('mouseover', function () {
+            layer.setStyle(hoverStyle);
+        });
+        layer.on('mouseout', function () {
+            layer.setStyle(style);
+        });
+    }
+};
+    
+
 function onLocationFound(e) {
     var radius = e.accuracy / 2;
     var lat = e.latlng.lat;
@@ -33,17 +64,3 @@ function onLocationFound(e) {
         window.location="add_toilet/" + lat + "/" + lng + "/";
     });
 }
-map.on('locationfound', onLocationFound);
-map.locate({setView: true, maxZoom: 16});
-
-
-function onEachFeature(feature, layer) {
-    // does this feature have a property named popupContent?
-    var link = ('<a href=/lavoratr/detail/' + feature.properties.id + '/ >detail</a>');
-    layer.bindPopup(link);
-}
-
-L.geoJson($data, {
-        onEachFeature: onEachFeature
-    })
-    .addTo(map);
