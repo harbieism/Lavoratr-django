@@ -36,8 +36,9 @@ function onEachFeature(feature, layer) {
         for (var k in feature.properties) {
             var v = feature.properties[k];
             popupString += k + ': ' + v + '<br />';
+            var link = ('<a href=/lavoratr/detail/' + feature.properties.id + '/ >detail</a>');
         }
-        popupString += '</div>';
+        popupString += link + '</div>';
         layer.bindPopup(popupString);
     }
     if (!(layer instanceof L.Point)) {
