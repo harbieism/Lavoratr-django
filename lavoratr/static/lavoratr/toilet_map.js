@@ -14,6 +14,12 @@ var youIcon = L.icon({
     popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
 });
 
+var toiletIcon = L.icon({
+    iconUrl: '/static/lavoratr/img/Toilet.png',
+    iconSize:     [40, 40], // size of the icon
+    iconAnchor:   [20, 20], // point of the icon which will correspond to marker's location
+    popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
+});
 
 var map = L.map('map', mapOptions);
 map.options.minZoom = 3;
@@ -30,7 +36,10 @@ L.tileLayer(
 
 
 L.geoJson($data, {
-    onEachFeature: onEachFeature
+    onEachFeature: onEachFeature,
+    pointToLayer: function (feature, latlng) {
+        return L.marker(latlng, {icon: toiletIcon, riseOnHover: true});
+    }
 }).addTo(map);
 
 
@@ -49,6 +58,7 @@ function onEachFeature(feature, layer) {
         link = ('<a href=/lavoratr/detail/' + feature.properties.id + '/ >detail</a>');
         popupString += link + '</div>';
         layer.bindPopup(popupString);
+        layer.icon = toiletIcon;
     };
 
     var hoverStyle = {
@@ -69,10 +79,8 @@ function onEachFeature(feature, layer) {
 
     if (!(layer instanceof L.Point)) {
         layer.on('mouseover', function () {
-            layer.setIcon(hoverStyle);
         });
         layer.on('mouseout', function () {
-            layer.setIcon(style);
         });
     }
 };
