@@ -8,7 +8,8 @@ class ToiletSerializer(GeoFeatureModelSerializer):
         model = Toilet
         geo_field = "point"
         id_field = False
-        fields = ('id', 'location', 'building', 'rating', 'gender', 'created',
-                  'single_occupancy', 'accesible', 'station', 'comment_box',
-                  'times_rated', 'lon', 'lat',
-                  )
+        fields = (
+            'id', 'location', 'building', 'rating', 'gender', 'created',
+            'single_occupancy', 'accesible', 'station', 'times_rated',
+            'times_authenticated',
+        )

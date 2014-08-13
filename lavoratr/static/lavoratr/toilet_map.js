@@ -91,6 +91,7 @@ function onLocationFound(e) {
         $('#lat').val(parseFloat(lat.toString()));
         $('#lng').val(parseFloat(lng.toString()));
 
+
     });
 
     $('#add_toilet').click(function (event) {

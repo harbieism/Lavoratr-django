@@ -1,0 +1,11 @@
+<h1>Add a Restroom</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'lavoratr:submit_toilet' %}" method="post">
+{% csrf_token %}
+{{ form.as_p }}
+<input geom_type="POINT" id="id_point" name="point" type="hidden" value="{{ point }}"/>
+<p><label for="id_comment_box">Comments:</label> <input id="id_comment_box" maxlength="127" name="comment_box" type="text" /></p>
+<input type="submit" value="Toilet">
+</form>
