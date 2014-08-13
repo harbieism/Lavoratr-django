@@ -7,6 +7,14 @@ var mapOptions = {
 };
 
 
+var youIcon = L.icon({
+    iconUrl: '/static/lavoratr/img/peeman.png',
+    iconSize:     [20, 40], // size of the icon
+    iconAnchor:   [10, 20], // point of the icon which will correspond to marker's location
+    popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
+});
+
+
 var map = L.map('map', mapOptions);
 map.options.minZoom = 3;
 
@@ -61,10 +69,10 @@ function onEachFeature(feature, layer) {
 
     if (!(layer instanceof L.Point)) {
         layer.on('mouseover', function () {
-            layer.setStyle(hoverStyle);
+            layer.setIcon(hoverStyle);
         });
         layer.on('mouseout', function () {
-            layer.setStyle(style);
+            layer.setIcon(style);
         });
     }
 };
@@ -79,7 +87,7 @@ function onLocationFound(e) {
 
 
 
-    var userMarker = L.marker(e.latlng, {draggable: true}).addTo(map)
+    var userMarker = L.marker(e.latlng, {icon: youIcon, draggable: true}).addTo(map)
         .bindPopup(lat.toString()).openPopup();
     
     L.circle(e.latlng, radius).addTo(map);
