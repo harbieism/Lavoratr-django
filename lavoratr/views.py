@@ -5,7 +5,7 @@ from lavoratr.models import Toilet, Review
 from lavoratr.serializers import ToiletSerializer
 from lavoratr.forms import ToiletForm
 from rest_framework.renderers import JSONRenderer
-from django.views import generic
+
 
 def index(request):
     latest_toilet_list = Toilet.objects.all()

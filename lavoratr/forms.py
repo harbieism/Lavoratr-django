@@ -2,7 +2,6 @@ from django.forms import ModelForm
 from lavoratr.models import Toilet
 from django import forms
 from django.contrib.gis import forms as GeoForms
-from django.core.exceptions import ValidationError
 
 MALE = 'M'
 FEMALE = 'F'
