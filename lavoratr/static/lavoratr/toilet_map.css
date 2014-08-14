@@ -43,6 +43,16 @@ html, body{
     height: 100%;
 }
 
+.leaflet-popup-content-wrapper {
+    background-color: #ffffff;
+    border: 5px solid #99B5E0;
+    border-radius: 25% !important;
+}
+
+.detail_link{
+	text-align: center;
+}
+
 #add_toilet{
 	position: relative;
 	top: 105%;
