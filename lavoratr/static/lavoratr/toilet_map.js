@@ -55,7 +55,10 @@ function onEachFeature(feature, layer) {
         realRating = feature.properties.rating / feature.properties.times_rated;
         popupString += 'Rating: ' + realRating + '<br />';
         popupString += 'Gender: ' + feature.properties.gender + '<br />';
-        link = ('<a href=/lavoratr/detail/' + feature.properties.id + '/ >detail</a>');
+        link = (
+            "<div class='detail_link'><a href=/lavoratr/detail/"
+            + feature.properties.id + "/>detail</a></div>"
+        );
         popupString += link + '</div>';
         layer.bindPopup(popupString);
         layer.icon = toiletIcon;
