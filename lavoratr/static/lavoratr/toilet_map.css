@@ -43,13 +43,21 @@ html, body{
     height: 100%;
 }
 
+.leaflet-popup-close-button {
+    right: 5% !important;
+    width: 10% !important;
+    top: 2% !important;
+}
+
+
+
 .leaflet-popup-content-wrapper {
     background-color: #ffffff;
     border: 5px solid #99B5E0;
-    border-radius: 25% !important;
+    border-radius: 20% !important;
 }
 
-.detail_link{
+.detail_link {
 	text-align: center;
 }
 
