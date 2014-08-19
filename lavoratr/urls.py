@@ -6,10 +6,17 @@ from lavoratr.models import Toilet
 urlpatterns = patterns(
     '',
     url(r'^$', views.index, name='index'),
+    url(
+        r'^add_review/(?P<toilet_id>\d+)/$',
+        views.add_review,
+        name='add_review'
+    ),
     url(r'^detail/(?P<toilet_id>\d+)/$', views.detail, name='detail'),
-    url(r'^data.geojson$', GeoJSONLayerView.as_view(
-        model=Toilet
-    ), name='data'),
+    url(
+        r'^data.geojson$',
+        GeoJSONLayerView.as_view(model=Toilet),
+        name='data'
+    ),
     url(
         r'^add_toilet/(?P<lat>-?\d+\.\d+)/(?P<lng>-?\d+\.\d+)/$',
         views.add_toilet,
