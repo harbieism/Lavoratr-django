@@ -98,8 +98,7 @@ function onLocationFound(e) {
 
 
 
-    var userMarker = L.marker(e.latlng, {icon: youIcon, draggable: true}).addTo(map)
-        .bindPopup(lat.toString()).openPopup();
+    var userMarker = L.marker(e.latlng, {icon: youIcon, draggable: true}).addTo(map);
     
     L.circle(e.latlng, radius).addTo(map);
 
