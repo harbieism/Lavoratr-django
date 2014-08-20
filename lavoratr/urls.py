@@ -23,4 +23,5 @@ urlpatterns = patterns(
         name='add_toilet'
     ),
     url(r'^submit_toilet/$', views.submit_toilet, name='submit_toilet'),
+    url(r'^submit_review/$', views.submit_review, name='submit_review'),
 )
