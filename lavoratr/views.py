@@ -32,7 +32,7 @@ def add_review(request, toilet_id):
 
 
 def submit_review(request):
-    toilet = Toilet.objects.get(id=request.POST['id'])
+    toilet = Toilet.objects.get(id=request.POST['toilet_id'])
     current_time = timezone.now()
     rating = int(request.POST['rating'])
     comment_box = request.POST['comment_box']

@@ -5,6 +5,6 @@
 <form action="{% url 'lavoratr:submit_review' %}" method="post">
   {% csrf_token %}
   {{ form.as_p }}
-  <input type="number" id="id" name="id" type="hidden" value="{{ toilet.id }}"/>
+  <input id="toilet_id" name="toilet_id" type="hidden" value="{{ toilet.id }}"/>
   <input type="submit" value="Submit">
 </form>
