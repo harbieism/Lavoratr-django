@@ -31,6 +31,25 @@ def add_review(request, toilet_id):
     )
 
 
+def submit_review(request):
+    toilet = Toilet.objects.get(id=request.POST['id'])
+    current_time = timezone.now()
+    rating = request.POST['rating']
+    comment_box = request.POST['comment_box']
+    toilet.rating += rating
+    toilet.times_rated += 1
+    toilet.save()
+    new_review = Review.objects.create(
+        toilet=toilet,
+        rating=rating,
+        comment_box=comment_box,
+        created=current_time
+    )
+    new_review.save()
+
+    return render(request, 'lavoratr/detail.html', {'toilet': toilet})
+
+
 def add_toilet(request, lat, lng):
     float_lat = float(lat)
     float_lng = float(lng)
