@@ -112,7 +112,7 @@ function onLocationFound(e) {
 
     });
 
-    $('#add_toilet').click(function (event) {
+    $('#add_restroom').click(function (event) {
         window.location="add_toilet/" + lat + "/" + lng + "/";
     });
 }
