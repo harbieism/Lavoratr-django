@@ -34,7 +34,7 @@ def add_review(request, toilet_id):
 def submit_review(request):
     toilet = Toilet.objects.get(id=request.POST['id'])
     current_time = timezone.now()
-    rating = request.POST['rating']
+    rating = int(request.POST['rating'])
     comment_box = request.POST['comment_box']
     toilet.rating += rating
     toilet.times_rated += 1
