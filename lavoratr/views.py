@@ -3,7 +3,7 @@ from django.utils import timezone
 from django.contrib.gis.geos import Point, GEOSGeometry
 from lavoratr.models import Toilet, Review
 from lavoratr.serializers import ToiletSerializer
-from lavoratr.forms import ToiletForm
+from lavoratr.forms import ToiletForm, ReviewForm
 from rest_framework.renderers import JSONRenderer
 
 
@@ -25,7 +25,10 @@ def detail(request, toilet_id):
 
 def add_review(request, toilet_id):
     toilet = get_object_or_404(Toilet, id=toilet_id)
-    return render(request, 'lavoratr/add_review.html', {'toilet': toilet})
+    return render(
+        request, 'lavoratr/add_review.html',
+        {'form': ReviewForm, 'toilet': toilet}
+    )
 
 
 def add_toilet(request, lat, lng):
