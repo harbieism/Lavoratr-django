@@ -1,10 +1,42 @@
-#map { height: 180px; }
 
- body {
-    background-color: #d0e4fe;
+body {
+    background-color: #FFF;
+
 }
 
-h1 {
-    color: orange;
+h1, p {
+    color: #000;
     text-align: center;
+}
+
+#link_div {
+    text-align: center;
+}
+
+#rate_bar {
+	width: 100px;
+	box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.65);
+	border-radius: 5px 5px 5px 5px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#rate_bar, #bad_ratings, #good_ratings {
+	height: 10px;
+}
+
+#bad_ratings, #good_ratings {
+	float: left;
+}
+
+#bad_ratings {
+	background-color: #666;
+	border-radius: 0px 5px 5px 0px;
+
+}
+
+#good_ratings {
+	background-color: #167AC6;
+	border-radius: 5px 0px 0px 5px;
+
 }

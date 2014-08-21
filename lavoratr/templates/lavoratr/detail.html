@@ -1,21 +1,37 @@
+<!DOCTYPE html>
+{% load staticfiles %}
 <html>
 
 <head>
+    <link rel="stylesheet" href="{% static 'lavoratr/detail.css' %}" />
 	<title>Lavoratr Toilet #{{ toilet.id }}</title>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 </head>
 <h1>{{  toilet.location  }}, {{  toilet.building  }}</h1>
 <body>
 	<div><p id="rating"></p></div>
+	<div id="rate_bar">
+		<div id="good_ratings"></div>
+		<div id="bad_ratings"></div>
+	</div>
+	<div><p id="times_rated">Based on {{ toilet.times_rated }} reviews.</p></div>
+	<div><p id="gender">Gender: {{ toilet.gender }}</p></div>
+	<div><p id="single_occupancy">Single Occupancy: {{ toilet.single_occupancy }}</p></div>
+	<div><p id="accesible">Accesible: {{ toilet.accesible }}</p></div>
+	<div><p id="station">Station: {{ toilet.station }}</p></div>
+
 	<script>
 		var $rating = {{ toilet.rating }};
 	    var $times_rated = {{ toilet.times_rated }};
         $( document ).ready(function() {
             var real_rating = $rating / $times_rated;
-            document.getElementById("rating").innerHTML = real_rating;
+            $( "#rating" ).html(real_rating);
+            $( "#good_ratings" ).css("width", real_rating * 10);
+            $( "#bad_ratings" ).css("width", 100 - real_rating * 10);
         });
     </script>
-    <div>
+
+    <div id="link_div">
     	<a href="/lavoratr/add_review/{{ toilet.id }}/">Add Review</a>
     </div>
 </body>
