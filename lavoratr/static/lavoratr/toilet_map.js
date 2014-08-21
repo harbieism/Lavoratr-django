@@ -30,7 +30,7 @@ mapLink =
 L.tileLayer(
         'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: 'Map data &copy; ' + mapLink,
-            maxZoom: 17,
+            maxZoom: 20,
         })
     .addTo(map);
 
