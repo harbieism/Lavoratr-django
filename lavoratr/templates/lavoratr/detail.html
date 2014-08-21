@@ -1,6 +1,9 @@
+<!DOCTYPE html>
+{% load staticfiles %}
 <html>
 
 <head>
+    <link rel="stylesheet" href="{% static 'lavoratr/detail.css' %}" />
 	<title>Lavoratr Toilet #{{ toilet.id }}</title>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 </head>
@@ -21,7 +24,7 @@
             document.getElementById("rating").innerHTML = real_rating;
         });
     </script>
-    <div>
+    <div id="link_div">
     	<a href="/lavoratr/add_review/{{ toilet.id }}/">Add Review</a>
     </div>
 </body>

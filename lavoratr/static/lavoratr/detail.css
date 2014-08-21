@@ -1,10 +1,14 @@
-#map { height: 180px; }
 
- body {
-    background-color: #d0e4fe;
+body {
+    background-color: #FFF;
+
 }
 
-h1 {
-    color: orange;
+h1, p {
+    color: #000;
+    text-align: center;
+}
+
+#link_div {
     text-align: center;
 }
