@@ -19,7 +19,12 @@
 	<div><p id="single_occupancy">Single Occupancy: {{ toilet.single_occupancy }}</p></div>
 	<div><p id="accesible">Accesible: {{ toilet.accesible }}</p></div>
 	<div><p id="station">Station: {{ toilet.station }}</p></div>
-
+	<div class="reviews">
+	<p>Comments:</p>
+	{% for review_comments in reviews %}
+	    <p>{{ review_comments.comment_box }}<p></br>
+	{% endfor %}
+    </div>
 	<script>
 		var $rating = {{ toilet.rating }};
 	    var $times_rated = {{ toilet.times_rated }};

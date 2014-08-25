@@ -20,7 +20,12 @@ def index(request):
 
 def detail(request, toilet_id):
     toilet = get_object_or_404(Toilet, id=toilet_id)
-    return render(request, 'lavoratr/detail.html', {'toilet': toilet})
+    reviews = Review.objects.filter(toilet=toilet)
+    return render(
+        request,
+        'lavoratr/detail.html',
+        {'toilet': toilet, 'reviews' : reviews}
+    )
 
 
 def add_review(request, toilet_id):
