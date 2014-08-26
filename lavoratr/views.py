@@ -52,8 +52,14 @@ def submit_review(request):
     )
     new_review.save()
 
-    return render(request, 'lavoratr/detail.html', {'toilet': toilet})
-
+    latest_toilet_list = Toilet.objects.all()
+    serializer = ToiletSerializer(latest_toilet_list)
+    toilets_json = JSONRenderer().render(serializer.data)
+    context = {
+        'toilets_json': toilets_json,
+        'latest_toilet_list': latest_toilet_list
+    }
+    return render(request, 'lavoratr/toilet.html', context)
 
 def add_toilet(request, lat, lng):
     float_lat = float(lat)
@@ -108,4 +114,11 @@ def submit_toilet(request):
     )
     new_review.save()
 
-    return render(request, 'lavoratr/detail.html', {'toilet': new_toilet})
+    latest_toilet_list = Toilet.objects.all()
+    serializer = ToiletSerializer(latest_toilet_list)
+    toilets_json = JSONRenderer().render(serializer.data)
+    context = {
+        'toilets_json': toilets_json,
+        'latest_toilet_list': latest_toilet_list
+    }
+    return render(request, 'lavoratr/toilet.html', context)
