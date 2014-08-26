@@ -2,6 +2,7 @@
 body {
     background-color: #FFF;
 
+
 }
 
 h1, p {
@@ -23,6 +24,10 @@ h1, p {
 
 #rate_bar, #bad_ratings, #good_ratings {
 	height: 10px;
+}
+
+.class_rating{
+	
 }
 
 #bad_ratings, #good_ratings {

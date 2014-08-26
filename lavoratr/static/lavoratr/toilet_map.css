@@ -24,6 +24,11 @@ html, body{
     margin-top: 0%;
 }
 
+.leaflet-popup-tip {
+    background-color: #99B5E0;
+    color: #99B5E0;
+}
+
 #map, #map_border{
 
     position: absolute;

@@ -24,7 +24,7 @@ def detail(request, toilet_id):
     return render(
         request,
         'lavoratr/detail.html',
-        {'toilet': toilet, 'reviews' : reviews}
+        {'toilet': toilet, 'reviews': reviews}
     )
 
 
@@ -60,6 +60,7 @@ def submit_review(request):
         'latest_toilet_list': latest_toilet_list
     }
     return render(request, 'lavoratr/toilet.html', context)
+
 
 def add_toilet(request, lat, lng):
     float_lat = float(lat)

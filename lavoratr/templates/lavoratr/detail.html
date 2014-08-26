@@ -19,10 +19,10 @@
 	<div><p id="single_occupancy">Single Occupancy: {{ toilet.single_occupancy }}</p></div>
 	<div><p id="accesible">Accesible: {{ toilet.accesible }}</p></div>
 	<div><p id="station">Station: {{ toilet.station }}</p></div>
-	<div class="reviews">
 	<p>Comments:</p>
+	<div id="comment_box">
 	{% for review_comments in reviews %} 
-	    <p> {{ review_comments.created }}:  {{ review_comments.rating }}
+	    <p class="comments"> {{ review_comments.created }}:  {{ review_comments.rating }}
 	    {% if review_comments.comment_box != ""  %}
 	        {{ review_comments.comment_box }}
 	    {% endif %}
