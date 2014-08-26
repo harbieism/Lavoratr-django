@@ -22,7 +22,9 @@
 	<div class="reviews">
 	<p>Comments:</p>
 	{% for review_comments in reviews %}
-	    <p>{{ review_comments.comment_box }}<p></br>
+	    {% if review_comments.comment_box != ""  %}
+	        <p>{{ review_comments.comment_box }}</p>
+	    {% endif %}
 	{% endfor %}
     </div>
 	<script>
