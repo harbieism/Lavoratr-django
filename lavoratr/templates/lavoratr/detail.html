@@ -21,10 +21,12 @@
 	<div><p id="station">Station: {{ toilet.station }}</p></div>
 	<div class="reviews">
 	<p>Comments:</p>
-	{% for review_comments in reviews %}
+	{% for review_comments in reviews %} 
+	    <p> {{ review_comments.created }}:  {{ review_comments.rating }}
 	    {% if review_comments.comment_box != ""  %}
-	        <p>{{ review_comments.comment_box }}</p>
+	        {{ review_comments.comment_box }}
 	    {% endif %}
+	    </p>
 	{% endfor %}
     </div>
 	<script>
