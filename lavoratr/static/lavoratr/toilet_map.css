@@ -15,6 +15,8 @@ body {
 html, body{
     height: 100%;
     width: 100%;
+    overflow: hidden;
+
 }
 
 #map_border{
@@ -30,7 +32,6 @@ html, body{
 }
 
 #map, #map_border{
-
     position: absolute;
     top:0;
     bottom: 0;
@@ -73,6 +74,48 @@ html, body{
 	width: 120px;
 }
 
+#slider_open_button{
+    position: relative;
+    float: right;
+    margin-left: auto;
+    margin-right: 0px;
+    width: 50px;
+    background-color: red;
+    height: 20%;
+    z-index: 99;
+    top: 40%;
+    background-color: #FFF;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    border-bottom-color: #000;
+    border-radius: 4px;
+    border-bottom-style: none;
+    border-bottom-width: 0px;
+    color: #000;
+    pointer-events: auto;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.65);
+}
+
+#right_slider {
+    position: relative;
+    width: 250px;
+    height: 100%;
+    float: right;
+    margin-left: auto;
+    right: -300px;
+    z-index: 99;
+    border-radius: 8px 0px 0px 8px;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.65);
+    background-color: #FFF;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    border-bottom-color: #000;
+    border-bottom-style: none;
+    border-bottom-width: 0px;
+    color: #000;
+    pointer-events: auto;
+}
+
 #add_restroom{
 	background-color: #FFF;
     background-position: 50% 50%;
@@ -101,5 +144,4 @@ html, body{
     -moz-text-decoration-line: none;
     -moz-text-decoration-style: solid;
     box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.65);
-    border-radius: 4px;
 }

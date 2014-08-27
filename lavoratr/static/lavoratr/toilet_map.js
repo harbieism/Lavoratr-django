@@ -2,6 +2,8 @@ var southWest = new L.LatLng(-85.0, -180.0);
 var northEast = new L.LatLng(85.0, 180.0);
 var restrictBounds = new L.LatLngBounds(southWest, northEast);
 
+var slider_out = true;
+
 var mapOptions = {
     maxBounds: restrictBounds
 };
@@ -116,3 +118,23 @@ function onLocationFound(e) {
         window.location="add_toilet/" + lat + "/" + lng + "/";
     });
 }
+
+$('#slider_open_button').click( function () {
+    if (slider_out == true){
+        $('#slider_open_button').animate({
+            right: "+=250"
+        });
+        $('#right_slider').animate({
+            right: "+=250"
+        });
+        slider_out = false;
+    } else {
+        $('#slider_open_button').animate({
+            right: "-=250"
+        });
+        $('#right_slider').animate({
+            right: "-=250"
+        });
+        slider_out = true;
+    }
+});
