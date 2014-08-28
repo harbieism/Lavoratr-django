@@ -119,7 +119,7 @@ def submit_toilet(request):
             )
             new_review.save()
 
-            return HttpResponseRedirect('/lavoratr/')        
+            return HttpResponseRedirect('/')        
     point = GEOSGeometry(request.POST['point'])
     context = {'form': ToiletForm, 'point': point.hex}
 

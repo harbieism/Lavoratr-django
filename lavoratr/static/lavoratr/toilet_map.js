@@ -58,7 +58,7 @@ function onEachFeature(feature, layer) {
         popupString += 'Rating: ' + realRating + '<br />';
         popupString += 'Gender: ' + feature.properties.gender + '<br />';
         link = (
-            "<div class='detail_link'><a href=/lavoratr/detail/"
+            "<div class='detail_link'><a href=/detail/"
             + feature.properties.id + "/>detail</a></div>"
         );
         popupString += link + '</div>';
