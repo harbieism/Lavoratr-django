@@ -38,29 +38,31 @@ def add_review(request, toilet_id):
 
 
 def submit_review(request):
-    toilet = Toilet.objects.get(id=request.POST['toilet_id'])
-    current_time = timezone.now()
-    rating = int(request.POST['rating'])
-    comment_box = request.POST['comment_box']
-    toilet.rating += rating
-    toilet.times_rated += 1
-    toilet.save()
-    new_review = Review.objects.create(
-        toilet=toilet,
-        rating=rating,
-        comment_box=comment_box,
-        created=current_time
-    )
-    new_review.save()
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            toilet = Toilet.objects.get(id=request.POST['toilet_id'])
+            current_time = timezone.now()
+            rating = int(request.POST['rating'])
+            comment_box = request.POST['comment_box']
+            toilet.rating += rating
+            toilet.times_rated += 1
+            toilet.save()
+            new_review = Review.objects.create(
+                toilet=toilet,
+                rating=rating,
+                comment_box=comment_box,
+                created=current_time
+            )
+            new_review.save()
 
-    latest_toilet_list = Toilet.objects.all()
-    serializer = ToiletSerializer(latest_toilet_list)
-    toilets_json = JSONRenderer().render(serializer.data)
-    context = {
-        'toilets_json': toilets_json,
-        'latest_toilet_list': latest_toilet_list
-    }
-    return render(request, 'lavoratr/toilet.html', context)
+            return HttpResponseRedirect('/')
+
+    toilet = get_object_or_404(Toilet, id=request.POST['toilet_id'])
+    return render(
+        request, 'lavoratr/add_review.html',
+        {'form': ReviewForm, 'toilet': toilet}
+    )
 
 
 def add_toilet(request, lat, lng):
@@ -119,7 +121,7 @@ def submit_toilet(request):
             )
             new_review.save()
 
-            return HttpResponseRedirect('/')        
+            return HttpResponseRedirect('/')
     point = GEOSGeometry(request.POST['point'])
     context = {'form': ToiletForm, 'point': point.hex}
 

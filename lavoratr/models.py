@@ -15,9 +15,11 @@ SEX_CHOICES = (
     (UNISEX, 'Unisex'),
 )
 
+
 def validate_length(value):
     if len(value) < 5:
         raise ValidationError('%s is not longer than 5 characters' % value)
+
 
 class Toilet(models.Model):
     location = models.CharField(

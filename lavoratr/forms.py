@@ -1,4 +1,3 @@
-from lavoratr.models import Toilet
 from django import forms
 from django.contrib.gis import forms as GeoForms
 from django.core.exceptions import ValidationError
@@ -11,9 +10,12 @@ SEX_CHOICES = (
     (FEMALE, 'Female'),
     (UNISEX, 'Unisex'),
 )
+
+
 def validate_length(value):
     if len(value) < 5:
         raise ValidationError('%s is not longer than 5 characters' % value)
+
 
 class ToiletForm(forms.Form):
     point = GeoForms.PointField(widget=forms.HiddenInput())
