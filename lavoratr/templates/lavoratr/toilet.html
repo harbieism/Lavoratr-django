@@ -23,8 +23,23 @@
     </div>
     <div id="slider_open_button"></div>
     <div id="right_slider">
-        <div id="button_container">
-            <a id="add_restroom" class="add_restroom" href="#" title="Add Restroom">Add Restroom</a>
+        <div class="button_container">
+            <a class="menu_button" id="add_restroom" class="add_restroom" href="#" title="Add Restroom">Add Restroom</a>
+        </div>
+        <div id='filter_boxes'>
+            <div id="gender_boxes">
+                <input type="checkbox" name="female" value="female" checked>Women's<br>
+                <input type="checkbox" name="male" value="male" checked>Men's<br>
+            </div>
+            <div id='option_boxes'>Show only restrooms that have these qualities<br>
+                <input class="option_box" type="checkbox" name="single_occupancy" value="single_occupancy">Single Occupancy<br>
+                <input class="option_box" type="checkbox" name="accesible" value="accesible">Disability Accesible<br>
+                <input class="option_box" type="checkbox" name="station" value="station">Changing Station<br>
+                <div class="button_container">
+                    <a class="menu_button" id="filter" class="add_restroom" href="#" title="Filter">Filter</a>
+                </div>
+            </div>
+
         </div>
     </div>
 

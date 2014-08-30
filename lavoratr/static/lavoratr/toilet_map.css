@@ -65,7 +65,7 @@ html, body{
 	text-align: center;
 }
 
-#button_container{
+.button_container{
 	position: absolute;
 	bottom: 0;
 	margin-bottom: 15px;
@@ -116,7 +116,7 @@ html, body{
     pointer-events: auto;
 }
 
-#add_restroom{
+.menu_button{
 	background-color: #FFF;
     background-position: 50% 50%;
     background-repeat: no-repeat;
