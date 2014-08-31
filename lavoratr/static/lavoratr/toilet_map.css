@@ -67,6 +67,7 @@ html, body{
 
 .button_container{
 	position: absolute;
+    float: right;
 	bottom: 0;
 	margin-bottom: 15px;
 	margin-left: 10px;
@@ -125,6 +126,7 @@ html, body{
     border-bottom-style: none;
     border-bottom-width: 0px;
     color: #000;
+    margin-top: 5px;
     cursor: pointer;
     display: block;
     font-family: 'Lucida Console',Monaco,monospace;
