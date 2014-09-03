@@ -30,4 +30,4 @@ class ToiletForm(forms.Form):
 
 class ReviewForm(forms.Form):
     rating = forms.IntegerField(min_value=1, max_value=10)
-    comment_box = forms.CharField(max_length=127)
+    comment_box = forms.CharField(max_length=127, required=False)
