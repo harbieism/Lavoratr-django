@@ -95,11 +95,12 @@ def submit_toilet(request):
                 station_bool = True
             else:
                 station_bool = False
-
-            if request.POST['rating'] == 1:
+            
+            rating = int(request.POST['rating'])
+            if rating == 1:
                 pos_rating = 1
                 neg_rating = 0
-            elif request.POST['rating'] == 2:
+            elif rating == 2:
                 pos_rating = 0
                 neg_rating = 1
 
@@ -124,7 +125,7 @@ def submit_toilet(request):
 
             new_review = Review.objects.create(
                 toilet=new_toilet,
-                rating=request.POST['rating'],
+                rating=rating,
                 comment_box=request.POST['comment_box'],
                 created=current_time,
             )
