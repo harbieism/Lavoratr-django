@@ -16,7 +16,7 @@ def validate_length(value):
     if len(value) < 5:
         raise ValidationError('%s is not longer than 5 characters' % value)
 
-
+'''NOTE:  for rating: 1=like, 2 = dislike, 3 = neutral'''
 class ToiletForm(forms.Form):
     point = GeoForms.PointField(widget=forms.HiddenInput())
     location = forms.CharField(
@@ -26,7 +26,7 @@ class ToiletForm(forms.Form):
         max_length=50, validators=[validate_length], required=True
     )
     gender = forms.ChoiceField(choices=SEX_CHOICES)
-    rating = forms.IntegerField(min_value=1, max_value=10)
+    rating = forms.IntegerField(min_value=1, max_value=3)
     single_occupancy = forms.BooleanField(required=False)
     accesible = forms.BooleanField(required=False)
     station = forms.BooleanField(required=False)
@@ -34,5 +34,5 @@ class ToiletForm(forms.Form):
 
 
 class ReviewForm(forms.Form):
-    rating = forms.IntegerField(min_value=1, max_value=10)
+    rating = forms.IntegerField(min_value=1, max_value=3)
     comment_box = forms.CharField(max_length=127, required=False)
