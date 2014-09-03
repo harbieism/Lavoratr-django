@@ -9,6 +9,5 @@
 {% csrf_token %}
 {{ form.as_p }}
 <input geom_type="POINT" id="id_point" name="point" type="hidden" value="{{ point }}"/>
-<p><label for="id_comment_box">Comments:</label> <input id="id_comment_box" maxlength="127" name="comment_box" type="text" /></p>
 <input type="submit" value="Submit">
 </form>

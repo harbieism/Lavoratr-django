@@ -26,6 +26,7 @@ class ToiletForm(forms.Form):
     single_occupancy = forms.BooleanField(required=False)
     accesible = forms.BooleanField(required=False)
     station = forms.BooleanField(required=False)
+    comment_box = forms.CharField(max_length=127, required=False)
 
 
 class ReviewForm(forms.Form):
