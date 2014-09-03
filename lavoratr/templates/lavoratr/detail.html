@@ -38,8 +38,8 @@
             var real_rating = $rating / $times_rated;
             $( "#times_rated").children("#calc_times_rated").text($times_rated);
             $( "#rating" ).html(real_rating);
-            $( "#good_ratings" ).css("width", real_rating * 10);
-            $( "#bad_ratings" ).css("width", 100 - real_rating * 10);
+            $( "#good_ratings" ).css("width", real_rating * 100);
+            $( "#bad_ratings" ).css("width", 100 - real_rating * 100);
         });
     </script>
 

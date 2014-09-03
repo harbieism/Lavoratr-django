@@ -20,6 +20,7 @@ h1, p {
 	border-radius: 5px 5px 5px 5px;
     margin-left: auto;
     margin-right: auto;
+    opacity: 1;
 }
 
 #rate_bar, #bad_ratings, #good_ratings {
@@ -32,9 +33,11 @@ h1, p {
 
 #bad_ratings, #good_ratings {
 	float: left;
+	z-index: 19;
 }
 
 #bad_ratings {
+	color: #666;
 	background-color: #666;
 	border-radius: 0px 5px 5px 0px;
 
@@ -42,6 +45,7 @@ h1, p {
 
 #good_ratings {
 	background-color: #167AC6;
+	color: #167AC6;
 	border-radius: 5px 0px 0px 5px;
 
 }
