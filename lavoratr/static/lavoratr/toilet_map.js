@@ -23,6 +23,20 @@ var toiletIcon = L.icon({
     popupAnchor:  [0, -20] // point from which the popup should open relative to the iconAnchor
 });
 
+var fToiletIcon = L.icon({
+    iconUrl: '/static/lavoratr/img/Toilet_F.png',
+    iconSize:     [40, 40], // size of the icon
+    iconAnchor:   [20, 20], // point of the icon which will correspond to marker's location
+    popupAnchor:  [0, -20] // point from which the popup should open relative to the iconAnchor
+});
+
+var mToiletIcon = L.icon({
+    iconUrl: '/static/lavoratr/img/Toilet_M.png',
+    iconSize:     [40, 40], // size of the icon
+    iconAnchor:   [20, 20], // point of the icon which will correspond to marker's location
+    popupAnchor:  [0, -20] // point from which the popup should open relative to the iconAnchor
+});
+
 var map = L.map('map', mapOptions);
 map.options.minZoom = 3;
 
@@ -37,12 +51,31 @@ L.tileLayer(
     .addTo(map);
 
 
-L.geoJson($data, {
+var bathroomLayer = L.geoJson($data, {
     onEachFeature: onEachFeature,
     pointToLayer: function (feature, latlng) {
-        return L.marker(latlng, {icon: toiletIcon, riseOnHover: true});
+        if (String(feature.properties.gender) == "M"){
+            layerIcon = mToiletIcon;
+        } else if (String(feature.properties.gender) == "F"){
+            layerIcon = fToiletIcon;
+        } else {
+            layerIcon = toiletIcon;
+        };
+        return L.marker(latlng, {icon: layerIcon, riseOnHover: true});
     }
 }).addTo(map);
+
+$("#filter").click( function (){
+    var boolFilterList = [];
+
+    bathroomLayer.clearLayers();
+    var bathroomLayer = L.geoJson($data, {
+        onEachFeature: onEachFeature,
+        pointToLayer: function (feature, latlng) {
+            return L.marker(latlng, {icon: toiletIcon, riseOnHover: true});
+        }
+    }).addTo(map);
+});
 
 
 map.on('locationfound', onLocationFound);
@@ -63,8 +96,8 @@ function onEachFeature(feature, layer) {
             + feature.properties.id + "/>detail</a></div>"
         );
         popupString += link + '</div>';
+        console.log(feature.properties.gender);
         layer.bindPopup(popupString);
-        layer.icon = toiletIcon;
     };
 
     var hoverStyle = {
