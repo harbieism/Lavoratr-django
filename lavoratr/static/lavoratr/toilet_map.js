@@ -54,7 +54,8 @@ function onEachFeature(feature, layer) {
         var popupString = '<div class="popup">';
         popupString += 'Location: ' + feature.properties.location + '<br />';
         popupString += 'Building: ' + feature.properties.building + '<br />';
-        realRating = feature.properties.rating / feature.properties.times_rated;
+        totalRatings = feature.properties.positive_ratings + feature.properties.negative_ratings;
+        realRating = feature.properties.positive_ratings / totalRatings;
         popupString += 'Rating: ' + realRating + '<br />';
         popupString += 'Gender: ' + feature.properties.gender + '<br />';
         link = (
