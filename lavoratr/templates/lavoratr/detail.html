@@ -14,7 +14,7 @@
 		<div id="good_ratings"></div>
 		<div id="bad_ratings"></div>
 	</div>
-	<div><p id="times_rated">Based on <p id='calc_times_rated'></p> reviews.</p></div>
+	<div><p id="times_rated">Based on <span id='calc_times_rated'></span> reviews.</p></div>
 	<div><p id="gender">Gender: {{ toilet.gender }}</p></div>
 	<div><p id="single_occupancy">Single Occupancy: {{ toilet.single_occupancy }}</p></div>
 	<div><p id="accesible">Accesible: {{ toilet.accesible }}</p></div>
@@ -36,7 +36,7 @@
 
         $( document ).ready(function() {
             var real_rating = $rating / $times_rated;
-            $( "#calc_times_rated").html($times_rated);
+            $( "#times_rated").children("#calc_times_rated").text($times_rated);
             $( "#rating" ).html(real_rating);
             $( "#good_ratings" ).css("width", real_rating * 10);
             $( "#bad_ratings" ).css("width", 100 - real_rating * 10);
