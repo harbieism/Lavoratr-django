@@ -19,8 +19,12 @@ def validate_length(value):
 
 class ToiletForm(forms.Form):
     point = GeoForms.PointField(widget=forms.HiddenInput())
-    location = forms.CharField(max_length=50, validators=[validate_length])
-    building = forms.CharField(max_length=50, validators=[validate_length])
+    location = forms.CharField(
+        max_length=50, validators=[validate_length], required=True
+    )
+    building = forms.CharField(
+        max_length=50, validators=[validate_length], required=True
+    )
     gender = forms.ChoiceField(choices=SEX_CHOICES)
     rating = forms.IntegerField(min_value=1, max_value=10)
     single_occupancy = forms.BooleanField(required=False)
