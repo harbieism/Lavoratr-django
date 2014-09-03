@@ -11,7 +11,7 @@ class ToiletAdmin(admin.ModelAdmin):
     ]
 
     list_display = (
-    	'building', 'location', 'positive_ratings', 'negative_ratings',
-    	'created'
+        'building', 'location', 'positive_ratings', 'negative_ratings',
+        'created'
     )
 admin.site.register(Toilet, ToiletAdmin)
