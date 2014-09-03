@@ -11,6 +11,6 @@ class ToiletSerializer(GeoFeatureModelSerializer):
         fields = (
             'id', 'location', 'building', 'positive_ratings',
             'negative_ratings', 'gender', 'created',
-            'single_occupancy', 'accesible', 'station', 'times_rated',
+            'single_occupancy', 'accesible', 'station',
             'times_authenticated',
         )
