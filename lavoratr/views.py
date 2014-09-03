@@ -45,8 +45,10 @@ def submit_review(request):
             current_time = timezone.now()
             rating = int(request.POST['rating'])
             comment_box = request.POST['comment_box']
-            toilet.rating += rating
-            toilet.times_rated += 1
+            if rating == 1:
+                toilet.positive_ratings += 1
+            elif rating == 2:
+                toilet.negative_ratings += 1
             toilet.save()
             new_review = Review.objects.create(
                 toilet=toilet,
@@ -94,17 +96,24 @@ def submit_toilet(request):
             else:
                 station_bool = False
 
+            if request.POST['rating'] == 1:
+                pos_rating = 1
+                neg_rating = 0
+            elif request.POST['rating'] == 2:
+                pos_rating = 0
+                neg_rating = 1
+
             current_time = timezone.now()
             new_toilet = Toilet.objects.create(
                 location=request.POST['location'],
                 building=request.POST['building'],
-                rating=request.POST['rating'],
+                positive_ratings=pos_rating,
+                negative_ratings=neg_rating,
                 gender=request.POST['gender'],
                 created=current_time,
                 single_occupancy=single_occupancy_bool,
                 accesible=accesible_bool,
                 station=station_bool,
-                times_rated=1,
                 times_authenticated=1,
                 point=GEOSGeometry(request.POST['point'])
             )
