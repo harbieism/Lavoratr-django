@@ -46,7 +46,7 @@ class Toilet(models.Model):
 
 class Review(models.Model):
     toilet = models.ForeignKey(Toilet)
-    rating = models.IntegerField(min_value=1, max_value=2)
+    rating = models.IntegerField()
     comment_box = models.CharField(max_length=127, blank=True)
     created = models.DateTimeField()
 
