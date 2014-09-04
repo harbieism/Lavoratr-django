@@ -95,7 +95,7 @@ def submit_toilet(request):
                 station_bool = True
             else:
                 station_bool = False
-            
+
             rating = int(request.POST['rating'])
             if rating == 1:
                 pos_rating = 1
