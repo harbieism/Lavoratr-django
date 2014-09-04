@@ -51,7 +51,7 @@ L.tileLayer(
     .addTo(map);
 
 
-var bathroomLayer = L.geoJson($data, {
+var restroomLayer = L.geoJson($data, {
     onEachFeature: onEachFeature,
     pointToLayer: function (feature, latlng) {
         if (String(feature.properties.gender) == "M"){
@@ -66,13 +66,80 @@ var bathroomLayer = L.geoJson($data, {
 }).addTo(map);
 
 $("#filter").click( function (){
-    var boolFilterList = [];
 
-    bathroomLayer.clearLayers();
-    var bathroomLayer = L.geoJson($data, {
+    var genderList = [];
+    var accesible = false;
+    var singleOccupancy = false;
+    var changingStation = false;
+
+    if ($('#female').is(':checked')){
+        genderList.push("F");
+    };
+    if ($('#male').is(':checked')){
+        genderList.push("M");
+    };
+    if ($('#unisex').is(':checked')){
+        genderList.push("U");
+    };
+
+    if ($('#single_occupancy').is(':checked')){
+        singleOccupancy = true;
+    };
+    if ($('#accesible').is(':checked')){
+        accesible = true;
+    };
+    if ($('#station').is(':checked')){
+        changingStation = true;
+    };
+
+    restroomLayer.clearLayers();
+    restroomLayer = L.geoJson($data, {
+        filter: function(feature, layer) {
+
+            var genderTrue = true;
+            var occupancyCheck = true;
+            var accesibleCheck = true;
+            var changingCheck = true;
+
+            if (genderList.indexOf(String(feature.properties.gender)) < 0){
+                genderTrue = false;
+            }
+            console.log("GenderTrue" + genderTrue);
+            if (singleOccupancy == true){
+                if (feature.properties.single_occupancy == false){
+                    occupancyCheck = false;
+                };
+            };
+            console.log("Occupancy" + occupancyCheck);
+            if (accesible == true){
+                if (feature.properties.accesible == false){
+                    accesibleCheck = false;
+                };
+            };
+            console.log("Accesible" + accesibleCheck);
+            if (changingStation == true){
+                if (feature.properties.station == false){
+                    changingCheck = false;
+                }
+            }
+            console.log('Changing' + changingCheck);
+            if (genderTrue && occupancyCheck && accesibleCheck && changingCheck){
+                return true;
+            } else {
+                return false;
+            }
+
+        },
         onEachFeature: onEachFeature,
         pointToLayer: function (feature, latlng) {
-            return L.marker(latlng, {icon: toiletIcon, riseOnHover: true});
+        if (String(feature.properties.gender) == "M"){
+            layerIcon = mToiletIcon;
+        } else if (String(feature.properties.gender) == "F"){
+            layerIcon = fToiletIcon;
+        } else {
+            layerIcon = toiletIcon;
+        };
+            return L.marker(latlng, {icon: layerIcon, riseOnHover: true});
         }
     }).addTo(map);
 });
@@ -96,7 +163,6 @@ function onEachFeature(feature, layer) {
             + feature.properties.id + "/>detail</a></div>"
         );
         popupString += link + '</div>';
-        console.log(feature.properties.gender);
         layer.bindPopup(popupString);
     };
 
@@ -144,8 +210,6 @@ function onLocationFound(e) {
         lng = coords.lng;
         $('#lat').val(parseFloat(lat.toString()));
         $('#lng').val(parseFloat(lng.toString()));
-
-
     });
 
     $('#add_restroom').click(function (event) {
