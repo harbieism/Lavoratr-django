@@ -5,14 +5,13 @@
 <head>
     <title>Lavoratr</title>
     <meta charset="utf-8" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <link rel="stylesheet" href="{% static 'leaflet/leaflet.css' %}" />
     <script src="{% static 'leaflet/leaflet.js' %}"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'lavoratr/toilet_map.css' %}" />
 
-    <script>
-    var $data = {{ toilets_json|safe }};
-    </script>
+    <script>var $data = {{ toilets_json|safe }};</script>
 
 </head>
 
@@ -36,6 +35,9 @@
                 <input class="option_box" type="checkbox" name="station" id="station">Changing Station<br>
             </div>
         </div>
+        <div id="slider_left"></div>
+        <div id="slider_mid"></div>
+        <div id="slider_right"></div>
         <div class='box_container'>
                 <a class="menu_button" id="add_restroom"  href="#" title="Add Restroom">Add Restroom</a>
                 <a class="menu_button" id="filter"  href="#" title="Filter">Filter Restrooms</a>
@@ -51,8 +53,21 @@
             <input type="text" id="other" name="other"/>
         </form>
     </div>
-    <script src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js">
-    </script>
+    
+    <div id="popup_wrapper">
+        <div id="popup_content">
+            {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+            <form action="{% url 'lavoratr:submit_toilet' %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input geom_type="POINT" id="id_point" name="point" type="hidden" value="{{ point }}"/>
+            <div id="submit_button">Submit</div>
+            </form>
+        </div>
+    </div>
+
+    <script src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js"></script>
 
     <script type="text/javascript" src="{% static 'lavoratr/toilet_map.js' %}"></script>
 </body>

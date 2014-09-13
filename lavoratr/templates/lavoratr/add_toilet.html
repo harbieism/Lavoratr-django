@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 {% load staticfiles %}
+<head>
+    <link rel="stylesheet" href="{% static 'lavoratr/add_toilet.css' %}" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+</head>
+<body>
+	<div id="content">
+		{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-<h1>Add a Restroom</h1>
-
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-
-<form action="{% url 'lavoratr:submit_toilet' %}" method="post">
-{% csrf_token %}
-{{ form.as_p }}
-<input geom_type="POINT" id="id_point" name="point" type="hidden" value="{{ point }}"/>
-<input type="submit" value="Submit">
-</form>
+		<form action="{% url 'lavoratr:submit_toilet' %}" method="post">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<input geom_type="POINT" id="id_point" name="point" type="hidden" value="{{ point }}"/>
+		<div id="submit_button">Submit</div>
+		</form>
+	</div>
+</body>

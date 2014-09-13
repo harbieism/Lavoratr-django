@@ -3,6 +3,7 @@
 <html>
 
 <head>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{% static 'lavoratr/detail.css' %}" />
 	<title>Lavoratr Toilet #{{ toilet.id }}</title>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -24,7 +25,7 @@
 	{% for review_comments in reviews %} 
 	    <p class="comments"> {{ review_comments.created }}:  {{ review_comments.rating }}
 	    {% if review_comments.comment_box != ""  %}
-	        {{ review_comments.comment_box }}
+	        <div class="comment"{{ review_comments.comment_box }}</div>
 	    {% endif %}
 	    </p>
 	{% endfor %}

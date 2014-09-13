@@ -41,14 +41,13 @@ var map = L.map('map', mapOptions);
 map.options.minZoom = 3;
 
 
-mapLink =
-    '<a href="http://openstreetmap.org">OpenStreetMap</a>';
+mapLink = '<a href="http://openstreetmap.org">OpenStreetMap</a>';
+
 L.tileLayer(
         'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: 'Map data &copy; ' + mapLink,
             maxZoom: 20,
-        })
-    .addTo(map);
+        }).addTo(map);
 
 
 var restroomLayer = L.geoJson($data, {
@@ -68,6 +67,7 @@ var restroomLayer = L.geoJson($data, {
         }
     })
     .addTo(map);
+
 
 $("#filter")
     .click(function() {
@@ -238,9 +238,7 @@ function onLocationFound(e) {
     });
 
     $('#add_restroom')
-        .click(function(event) {
-            window.location = "add_toilet/" + lat + "/" + lng + "/";
-        });
+        .click(function(event) (div_show()))
 }
 
 $('#slider_open_button')
@@ -267,3 +265,33 @@ $('#slider_open_button')
             slider_out = true;
         }
     });
+
+
+    //Function To Display Popup
+
+function div_show() {
+        document.getElementById('popup_wrapper')
+            .style.display = "block";
+    }
+    //Function To Check Target Element
+
+function check(e) {
+        var target = (e && e.target) || (event && event.srcElement);
+        var obj = document.getElementById('popup_wrapper');
+        var obj2 = document.getElementById('popup_content');
+        checkParent(target) ? obj.style.display = 'none' : null;
+        target == obj2 ? obj.style.display = 'block' : null;
+    }
+    //Function To Check Parent Node And Return Result Accordingly
+
+function checkParent(t) {
+        while (t.parentNode) {
+            if (t == document.getElementById('popup_wrapper')) {
+                return false
+            } else if (t == document.getElementById('close')) {
+                return true
+            }
+            t = t.parentNode
+        }
+        return true
+}

@@ -13,6 +13,7 @@ def index(request):
     serializer = ToiletSerializer(latest_toilet_list)
     toilets_json = JSONRenderer().render(serializer.data)
     context = {
+        'form': ToiletForm,
         'toilets_json': toilets_json,
         'latest_toilet_list': latest_toilet_list
     }
