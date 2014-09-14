@@ -239,9 +239,15 @@ function onLocationFound(e) {
     });
 }
 
+
+$( "#submit_button" ).click(function() {
+    $( "#add_toilet_form" ).submit();
+});
+
 $('#add_restroom').click(function(event) (div_show()));
 
 $('#close').click(function(event) (div_hide()));
+
 
 $('#slider_open_button')
     .click(function() {

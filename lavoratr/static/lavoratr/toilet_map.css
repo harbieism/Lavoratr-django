@@ -152,6 +152,11 @@ html, body{
     position: absolute;
     bottom: 0px;
     width: 100%;
+    margin-left: 10px;
+}
+
+#submit_form_button{
+    display: none;
 }
 
 #submit_button{

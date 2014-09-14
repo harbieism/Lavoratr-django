@@ -58,12 +58,13 @@
         <div id="popup_content">
             {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-            <form action="{% url 'lavoratr:submit_toilet' %}" method="post">
+            <form action="{% url 'lavoratr:submit_toilet' %}" id="add_toilet_form" method="post">
             <div id="close"></div>
             {% csrf_token %}
             {{ form.as_p }}
             <input geom_type="POINT" id="id_point" name="point" type="hidden" value="{{ point }}"/>
-            <div id="submit_button">Submit</div>
+            <input type="submit" id="submit_form_button"/>
+            <div class='menu_button' id="submit_button">Submit</div>
             </form>
         </div>
     </div>
