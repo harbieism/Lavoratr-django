@@ -1,5 +1,4 @@
 from django import forms
-from django.contrib.gis import forms as GeoForms
 from django.core.exceptions import ValidationError
 
 MALE = 'M'
@@ -21,7 +20,6 @@ def validate_length(value):
 
 
 class ToiletForm(forms.Form):
-    point = GeoForms.PointField(widget=forms.HiddenInput())
     location = forms.CharField(
         max_length=50, validators=[validate_length], required=True
     )
@@ -34,6 +32,8 @@ class ToiletForm(forms.Form):
     accesible = forms.BooleanField(required=False)
     station = forms.BooleanField(required=False)
     comment_box = forms.CharField(max_length=127, required=False)
+    lat = forms.FloatField()
+    lng = forms.FloatField()
 
 
 class ReviewForm(forms.Form):

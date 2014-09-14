@@ -16,10 +16,7 @@
 </head>
 
 <body>
-    <div>
-        <input type="hidden" id="lat" name="lat"/>
-        <input type="hidden" id="lng" name="lng"/>
-    </div>
+    
     <div id="slider_open_button"></div>
     <div id="right_slider">
 
@@ -57,15 +54,28 @@
     <div id="popup_wrapper">
         <div id="popup_content">
             {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-
             <form action="{% url 'lavoratr:submit_toilet' %}" id="add_toilet_form" method="post">
             <div id="close"></div>
+
             {% csrf_token %}
-            {{ form.as_p }}
-            <input geom_type="POINT" id="id_point" name="point" type="hidden" value="{{ point }}"/>
-            <input type="submit" id="submit_form_button"/>
+ 
+            <p><label for="id_location">Location:</label> <input id="id_location" maxlength="50" name="location" type="text" /></p>
+            <p><label for="id_building">Building:</label> <input id="id_building" maxlength="50" name="building" type="text" /></p>
+            <p><label for="id_gender">Gender:</label> <select id="id_gender" name="gender">
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+            <option value="U">Unisex</option>
+            </select></p>
+            <p><label for="id_rating">Rating:</label> <input id="id_rating" max="2" min="1" name="rating" type="number" /></p>
+            <p><label for="id_single_occupancy">Single occupancy:</label> <input id="id_single_occupancy" name="single_occupancy" type="checkbox" /></p>
+            <p><label for="id_accesible">Accesible:</label> <input id="id_accesible" name="accesible" type="checkbox" /></p>
+            <p><label for="id_station">Station:</label> <input id="id_station" name="station" type="checkbox" /></p>
+            <p><label for="id_comment_box">Comment box:</label> <input id="id_comment_box" maxlength="127" name="comment_box" type="text" /></p>
+            <p> <input id="id_lat" name="lat" step="any" type="number" /></p>
+            <p> <input id="id_lng" name="lng" step="any" type="number" /></p>            
             <div class='menu_button' id="submit_button">Submit</div>
             </form>
+            <div id='return'></div>
         </div>
     </div>
 

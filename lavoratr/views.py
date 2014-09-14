@@ -1,11 +1,11 @@
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
-from django.contrib.gis.geos import Point, GEOSGeometry
+from django.contrib.gis.geos import Point
 from lavoratr.models import Toilet, Review
 from lavoratr.serializers import ToiletSerializer
 from lavoratr.forms import ToiletForm, ReviewForm
 from rest_framework.renderers import JSONRenderer
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 
 
 def index(request):
@@ -59,7 +59,7 @@ def submit_review(request):
             )
             new_review.save()
 
-            return HttpResponseRedirect('/')
+            return HttpResponse('Yes')
 
     toilet = get_object_or_404(Toilet, id=request.POST['toilet_id'])
     return render(
@@ -117,8 +117,12 @@ def submit_toilet(request):
                 accesible=accesible_bool,
                 station=station_bool,
                 times_authenticated=1,
-                point=GEOSGeometry(request.POST['point'])
+                point=Point(
+                    float(request.POST['lng']),
+                    float(request.POST['lat'])
+                )
             )
+
             new_toilet.save()
 
             new_id = new_toilet.id
@@ -133,7 +137,7 @@ def submit_toilet(request):
             new_review.save()
 
             return HttpResponseRedirect('/')
-    point = GEOSGeometry(request.POST['point'])
+    point = Point(float(request.POST['lng']), float(request.POST['lat']))
     context = {'form': ToiletForm, 'point': point.hex}
 
     return render(request, 'lavoratr/add_toilet.html', context)

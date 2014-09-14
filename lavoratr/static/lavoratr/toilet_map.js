@@ -232,22 +232,36 @@ function onLocationFound(e) {
         var coords = e.target.getLatLng();
         lat = coords.lat;
         lng = coords.lng;
-        $('#lat')
+        $('#id_lat')
             .val(parseFloat(lat.toString()));
-        $('#lng')
+        $('#id_lng')
             .val(parseFloat(lng.toString()));
     });
 }
 
 
 $( "#submit_button" ).click(function() {
-    $( "#add_toilet_form" ).submit();
-});
+    var str = $('#add_toilet_form').serialize();
+        $.post('submit_toilet/',
+          str,
+          function(data){
+            console.log("Itworked!")
+          });
+    div_hide();
+    })
 
-$('#add_restroom').click(function(event) (div_show()));
+$('#add_restroom').click(
+    function(event) {
+        div_show();
+        console.log(id_lat);
+        console.log(id_lng);
+
+
+    });
 
 $('#close').click(function(event) (div_hide()));
 
+$('#form_wrapper').click(function(event) (div_hide()));
 
 $('#slider_open_button')
     .click(function() {
@@ -288,6 +302,7 @@ $( ".menu_button" ).hover(
 function div_show() {
         document.getElementById('popup_wrapper')
             .style.display = "block";
+
     }
 
 function div_hide() {
