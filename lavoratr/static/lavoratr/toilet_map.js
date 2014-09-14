@@ -69,6 +69,7 @@ var restroomLayer = L.geoJson($data, {
     .addTo(map);
 
 
+
 $("#filter")
     .click(function() {
 
@@ -236,10 +237,11 @@ function onLocationFound(e) {
         $('#lng')
             .val(parseFloat(lng.toString()));
     });
-
-    $('#add_restroom')
-        .click(function(event) (div_show()))
 }
+
+$('#add_restroom').click(function(event) (div_show()));
+
+$('#close').click(function(event) (div_hide()));
 
 $('#slider_open_button')
     .click(function() {
@@ -266,6 +268,14 @@ $('#slider_open_button')
         }
     });
 
+$( ".menu_button" ).hover(
+    function() {
+        $( this ).css("box-shadow", "inset 0 0 10px #000000");
+    }, 
+    function() {
+        $( this ).css("box-shadow", "0px 1px 5px rgba(0, 0, 0, 0.65)");
+    }
+);
 
     //Function To Display Popup
 
@@ -273,6 +283,12 @@ function div_show() {
         document.getElementById('popup_wrapper')
             .style.display = "block";
     }
+
+function div_hide() {
+        document.getElementById('popup_wrapper')
+            .style.display = "none";
+    }
+
     //Function To Check Target Element
 
 function check(e) {
@@ -294,4 +310,4 @@ function checkParent(t) {
             t = t.parentNode
         }
         return true
-}
+    }
