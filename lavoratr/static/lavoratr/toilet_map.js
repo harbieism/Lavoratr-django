@@ -245,7 +245,7 @@ $( "#submit_button" ).click(function() {
         $.post('submit_toilet/',
           str,
           function(data){
-            console.log(data)
+            console.log("Itworked!")
           });
     div_hide()
     })
@@ -259,9 +259,13 @@ $('#add_restroom').click(
 
     })
 
-$('#close').click(function(event) (div_hide()))
+$('#close').click(function(event){
+     div_hide()
+ });
 
-$('#form_wrapper').click(function(event) (div_hide()));
+$('#popup_background').click(function(event){ 
+    div_hide()
+});
 
 $('#slider_open_button')
     .click(function() {
