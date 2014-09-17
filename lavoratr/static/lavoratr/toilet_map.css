@@ -21,9 +21,7 @@ html, body{
 
 #map_border{
 	background-color: #00CC66;
-    width: 100%;
-    height: 100%;
-    margin-top: 0%;
+
 }
 
 .leaflet-popup-tip {
@@ -32,20 +30,20 @@ html, body{
 }
 
 #map, #map_border{
-    position: absolute;
-    top:0;
+    position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: auto;
 }
 
 #map{
-    width: 100%;
-    height: 100%;
+    top: 50px;
+    padding-top: 500px;
 }
+
+
 
 .leaflet-popup-close-button {
     right: 5% !important;
@@ -248,4 +246,15 @@ overflow:auto;
 left:50%;
 top:17%;
 margin-left:-202px;
+}
+
+#navbar{
+    width: 100%;
+    height: 50px;
+    position: fixed;
+    right: 0px;
+    left: 0px;
+    top: 0px;
+    z-index: 670;
+    background-color: white;
 }
