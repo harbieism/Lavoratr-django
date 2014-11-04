@@ -1,90 +1,12 @@
-<!DOCTYPE html>
-{% load staticfiles %}
-<html>
+{% extends "lavoratr/base.html" %}
+{% load static %}
+{% block extra_head %}
+  <link rel="stylesheet" type="text/css" href="{% static 'lavoratr/toilet_map.css' %}" />
+  <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.css' rel='stylesheet' />
+{% endblock %}
 
-<head>
-    <title>Lavoratr</title>
-    <meta charset="utf-8" />
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="{% static 'leaflet/leaflet.css' %}" />
-    <script src="{% static 'leaflet/leaflet.js' %}"></script>
-    <link rel="stylesheet" type="text/css" href="{% static 'lavoratr/toilet_map.css' %}" />
-    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
-    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-
-    <script>var $data = {{ toilets_json|safe }};</script>
-
-</head>
-
-<body>
-    <div id="navbar"></div>
-    <div id="slider_open_button"></div>
-    <div id="right_slider">
-
-        <div id='filter_boxes'>
-            <div id="gender_boxes">
-                <input type="checkbox" id="female" name="female">Women's<br>
-                <input type="checkbox" id="male" name="male">Men's<br>
-                <input type="checkbox" id="unisex" name="unisex">Unisex<br>
-            </div>
-            <div id='option_boxes'>Show only restrooms that have these qualities<br>
-                <input class="option_box" type="checkbox" name="single_occupancy" id="single_occupancy">Single Occupancy<br>
-                <input class="option_box" type="checkbox" name="accesible" id="accesible">Disability Accesible<br>
-                <input class="option_box" type="checkbox" name="station" id="station">Changing Station<br>
-            </div>
-        </div>
-        <div id="slider_left"></div>
-        <div id="slider_mid"></div>
-        <div id="slider_right"></div>
-        <div class='box_container'>
-                <a class="menu_button" id="add_restroom"  href="#" title="Add Restroom">Add Restroom</a>
-                <a class="menu_button" id="filter"  href="#" title="Filter">Filter Restrooms</a>
-        </div>
-    </div>
-
-    <div id="map_border">
-        <div id="map"></div>
-    </div>
-    <div>    
-        <form id="dialogform" style="display: none">
-            <input type="hidden" id="point" name="point"/>
-            <input type="text" id="other" name="other"/>
-        </form>
-    </div>
-    
-    <div id="popup_wrapper">
-        <div id="popup_background"></div>
-        <div id="popup_content">
-            {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-            <form action="{% url 'lavoratr:submit_toilet' %}" id="add_toilet_form" method="post">
-            <div id="close"></div>
-
-            {% csrf_token %}
- 
-            <p><label for="id_location">Location:</label> <input id="id_location" maxlength="50" name="location" type="text" /></p>
-            <p><label for="id_building">Building:</label> <input id="id_building" maxlength="50" name="building" type="text" /></p>
-            <p><label for="id_gender">Gender:</label> <select id="id_gender" name="gender">
-            <option value="M">Male</option>
-            <option value="F">Female</option>
-            <option value="U">Unisex</option>
-            </select></p>
-            <p><label for="id_rating">Rating:</label> <input id="id_rating" max="2" min="1" name="rating" type="number" /></p>
-            <p><label for="id_single_occupancy">Single occupancy:</label> <input id="id_single_occupancy" name="single_occupancy" type="checkbox" /></p>
-            <p><label for="id_accesible">Accesible:</label> <input id="id_accesible" name="accesible" type="checkbox" /></p>
-            <p><label for="id_station">Station:</label> <input id="id_station" name="station" type="checkbox" /></p>
-            <p><label for="id_comment_box">Comment box:</label> <input id="id_comment_box" maxlength="127" name="comment_box" type="text" /></p>
-            <p> <input id="id_lat" name="lat" step="any" type="hidden" /></p>
-            <p> <input id="id_lng" name="lng" step="any" type="hidden" /></p>            
-            <div class='menu_button' id="submit_button">Submit</div>
-            </form>
-            <div id='return'></div>
-        </div>
-    </div>
-
-    <script src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js"></script>
-
-    <script type="text/javascript" src="{% static 'lavoratr/toilet_map.js' %}"></script>
-</body>
-
-</html>
+{% block content %}
+  <div id="map"></div>
+  <script type="text/javascript" src="{% static 'lavoratr/toilet_map.js' %}"></script>
+{% endblock %}
