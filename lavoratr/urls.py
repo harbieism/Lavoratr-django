@@ -24,4 +24,5 @@ urlpatterns = patterns(
     ),
     url(r'^submit_toilet/$', views.submit_toilet, name='submit_toilet'),
     url(r'^submit_review/$', views.submit_review, name='submit_review'),
+    url(r'^get.geojson.js$', views.get_geojson, name='get_geojson'),
 )

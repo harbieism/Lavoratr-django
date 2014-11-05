@@ -19,6 +19,11 @@ def index(request):
     }
     return render(request, 'lavoratr/toilet.html', context)
 
+def get_geojson(request):
+    latest_toilet_list = Toilet.objects.all()
+    serializer = ToiletSerializer(latest_toilet_list)
+    toilets_json = JSONRenderer().render(serializer.data)
+    return HttpResponse(toilets_json, content_type = "application/json")
 
 def detail(request, toilet_id):
     toilet = get_object_or_404(Toilet, id=toilet_id)
