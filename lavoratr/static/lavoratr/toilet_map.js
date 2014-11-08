@@ -1,6 +1,11 @@
 $( document ).ready(function() {
 
+    var geojsonLayer;
+    
 
+	$("#refresh").click( function () {
+	    getData();
+	})
 
 	L.mapbox.accessToken = 'pk.eyJ1IjoiaGFyYmllaXNtIiwiYSI6IksyU1Rkc0UifQ.eXciAIxM0pfdj5STBHNnbQ';
 
@@ -22,14 +27,18 @@ $( document ).ready(function() {
 	});
 
 
-	$.get( 'get.geojson.js', function(data) {
-		L.geoJson(data, {
-			onEachFeature: function(feature, layer) {
-				layer.bindPopup(feature.properties.location);
-			}
-	    }).addTo(map);
-
-	});
+	var getData = (function() {
+		$.get( 'get.geojson.js', function(data) {
+			geojsonLayer = L.geoJson(data, {
+				onEachFeature: function(feature, layer) {
+					layer.bindPopup(feature.properties.location);
+				}
+		    })
+		    geojsonLayer.addTo(map);
+		});
+    });
+    
+	getData();
 
 
 });
