@@ -28,17 +28,25 @@ $( document ).ready(function() {
 
 
 	var getData = (function() {
-		$.get( 'get.geojson.js', function(data) {
-			geojsonLayer = L.geoJson(data, {
-				onEachFeature: function(feature, layer) {
-					layer.bindPopup(feature.properties.location);
-				}
-		    })
-		    geojsonLayer.addTo(map);
-		});
+		var bounds = map.getBounds();
+	    var southWest = bounds.getSouthWest();
+	    var northEast = bounds.getNorthEast();
+	    var boundObject = {
+			southWestLat: southWest.lat,
+			southWestLng: southWest.lng,
+			northEastLat: northEast.lat,
+			northEastLng: northEast.lng,
+	    }
+
+	    $.get( 'get.geojson.js', boundObject, function(data) {
+	    	geojsonLayer = L.geoJson(data, {
+	    		onEachFeature: function(feature, layer) {
+	    			layer.bindPopup(feature.properties.location);
+	    		}
+	    	})
+        })
+        geojsonLayer.addTo(map);
     });
-    
-	getData();
-
-
+            
+	    getData();
 });
