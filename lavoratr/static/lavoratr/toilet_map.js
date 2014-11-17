@@ -1,7 +1,10 @@
+
+
+
 $(document).ready(function() {
 
     var geojsonLayer;
-    var modal = "<a href='#' class='btn btn-lg btn-success'data-toggle='modal'data-target='#basicModal'>Click to open Modal</a>";
+    var modal = "<a href='#get_modal_data_{}' class='btn btn-lg btn-success'data-toggle='modal'data-target='#basicModal'>Click to open Modal</a>";
 
 	$("#refresh").click( function () {
 		geojsonLayer.clearLayers();
@@ -32,7 +35,8 @@ $(document).ready(function() {
 		$.get( 'get.geojson.js', function(data) {
 			geojsonLayer = L.geoJson(data, {
 				onEachFeature: function(feature, layer) {
-					layer.bindPopup(feature.properties.location + modal);
+					var modalLink = modal.replace('{}', feature.properties.id)
+					layer.bindPopup(feature.properties.location + modalLink);
 				}
 		    })
 		    geojsonLayer.addTo(map);
