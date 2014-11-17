@@ -20,7 +20,7 @@ def index(request):
     return render(request, 'lavoratr/toilet.html', context)
 
 def get_geojson(request):
-    latest_toilet_list = Toilet.objects.all()
+    latest_toilet_list = Toilet.objects.all()[:6]
     serializer = ToiletSerializer(latest_toilet_list)
     toilets_json = JSONRenderer().render(serializer.data)
     return HttpResponse(toilets_json, content_type = "application/json")

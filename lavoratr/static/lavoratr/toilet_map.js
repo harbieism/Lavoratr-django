@@ -1,9 +1,10 @@
-$( document ).ready(function() {
+$(document).ready(function() {
 
     var geojsonLayer;
-    
+    var modal = "<a href='#' class='btn btn-lg btn-success'data-toggle='modal'data-target='#basicModal'>Click to open Modal</a>";
 
 	$("#refresh").click( function () {
+		geojsonLayer.clearLayers();
 	    getData();
 	})
 
@@ -16,37 +17,29 @@ $( document ).ready(function() {
 	  userLng = position.coords.longitude;
 	  map.setView([userLat, userLng], 9)
 
-	  	var userMarker = L.marker(new L.LatLng(userLat, userLng), {
-		    icon: L.mapbox.marker.icon({
-		        'marker-color': 'ff8888'
-		    }),
-		    draggable: true
-		});
-
-		userMarker.addTo(map);
+	  var userMarker = L.marker(new L.LatLng(userLat, userLng), {
+	      icon: L.mapbox.marker.icon({
+	          'marker-color': 'ff8888'
+	      }),
+	      draggable: true
+	  });  
+	  userMarker.addTo(map);
 	});
 
 
-	var getData = (function() {
-		var bounds = map.getBounds();
-	    var southWest = bounds.getSouthWest();
-	    var northEast = bounds.getNorthEast();
-	    var boundObject = {
-			southWestLat: southWest.lat,
-			southWestLng: southWest.lng,
-			northEastLat: northEast.lat,
-			northEastLng: northEast.lng,
-	    }
 
-	    $.get( 'get.geojson.js', boundObject, function(data) {
-	    	geojsonLayer = L.geoJson(data, {
-	    		onEachFeature: function(feature, layer) {
-	    			layer.bindPopup(feature.properties.location);
-	    		}
-	    	})
-        })
-        geojsonLayer.addTo(map);
+	var getData = (function() {
+		$.get( 'get.geojson.js', function(data) {
+			geojsonLayer = L.geoJson(data, {
+				onEachFeature: function(feature, layer) {
+					layer.bindPopup(feature.properties.location + modal);
+				}
+		    })
+		    geojsonLayer.addTo(map);
+		});
     });
-            
-	    getData();
+    
+	getData();
+
+
 });
