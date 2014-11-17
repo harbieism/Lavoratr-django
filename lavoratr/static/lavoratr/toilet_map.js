@@ -47,11 +47,18 @@ $(document).ready(function() {
 					var modalLink = modal.replace('{}', feature.properties.id)
 					var rating_total = feature.properties.positive_ratings + feature.properties.negative_ratings
 					console.log(rating_total)
-					var rating = feature.properties.positive_ratings / rating_total;
-					var popupString = "<p>{0}</p><p>{1}</p><p>{2}</p><div id='rate_bar'><div id='good_ratings'></div><div id='bad_ratings'></div></div>".format(
+					if (rating_total == 0) {
+						var goodWidth = 0;
+						var rating = 0;
+					} else {
+						var rating = feature.properties.positive_ratings / rating_total;
+						var goodWidth = rating * 100;
+					}
+					var popupString = "<p>{0}</p><p>{1}</p><p>{2}</p><div class='progress'><div class='progress-bar' role='progressbar' aria-valuenow='{3}' aria-valuemin='0' aria-valuemax='100' style='width: {3}%;'><span class='sr-only'>{3}%</span></div></div>".format(
 						feature.properties.location,
 						feature.properties.building,
-						rating)
+						rating,
+						goodWidth)
 					var popup = layer.bindPopup(popupString);
 					popup.id = feature.properties.id;
 				}
@@ -61,6 +68,9 @@ $(document).ready(function() {
     });
     
 
+    map.on('popupopen', function(e) {
+
+    });
 	getData()
 
 });
