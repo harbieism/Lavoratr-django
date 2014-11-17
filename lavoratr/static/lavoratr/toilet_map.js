@@ -1,6 +1,3 @@
-
-
-
 $(document).ready(function() {
 
     var geojsonLayer;
@@ -29,21 +26,41 @@ $(document).ready(function() {
 	  userMarker.addTo(map);
 	});
 
-
+	if (!String.prototype.format) {
+	  String.prototype.format = function() {
+	    var args = arguments;
+	    return this.replace(/{(\d+)}/g, function(match, number) { 
+	      return typeof args[number] != 'undefined'
+	        ? args[number]
+	        : match
+	      ;
+	    });
+	  };
+	}
 
 	var getData = (function() {
 		$.get( 'get.geojson.js', function(data) {
+			var dataStorage = data;
+			console.log(dataStorage);
 			geojsonLayer = L.geoJson(data, {
 				onEachFeature: function(feature, layer) {
 					var modalLink = modal.replace('{}', feature.properties.id)
-					layer.bindPopup(feature.properties.location + modalLink);
+					var rating_total = feature.properties.positive_ratings + feature.properties.negative_ratings
+					console.log(rating_total)
+					var rating = feature.properties.positive_ratings / rating_total;
+					var popupString = "<p>{0}</p><p>{1}</p><p>{2}</p><div id='rate_bar'><div id='good_ratings'></div><div id='bad_ratings'></div></div>".format(
+						feature.properties.location,
+						feature.properties.building,
+						rating)
+					var popup = layer.bindPopup(popupString);
+					popup.id = feature.properties.id;
 				}
 		    })
 		    geojsonLayer.addTo(map);
 		});
     });
     
-	getData();
 
+	getData()
 
 });

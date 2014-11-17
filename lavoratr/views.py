@@ -34,6 +34,13 @@ def detail(request, toilet_id):
         {'toilet': toilet, 'reviews': reviews}
     )
 
+def modal_data(request, toilet_id):
+    toilet = get_object_or_404(Toilet, id=toilet_id)
+    serializer = ToiletSerializer(toilet)
+    toilet_json = JSONRenderer().render(serializer.data)
+    return HttpResponse(toilet_json, content_type = "application/json")
+
+
 
 def add_review(request, toilet_id):
     toilet = get_object_or_404(Toilet, id=toilet_id)

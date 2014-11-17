@@ -23,6 +23,7 @@ urlpatterns = patterns(
         name='add_toilet'
     ),
     url(r'^submit_toilet/$', views.submit_toilet, name='submit_toilet'),
+    url(r'^get_modal_data/(?P<toilet_id>\d+)/$', views.modal_data, name='modal_data'),
     url(r'^submit_review/$', views.submit_review, name='submit_review'),
     url(r'^get.geojson.js$', views.get_geojson, name='get_geojson'),
 )
