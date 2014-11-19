@@ -24,7 +24,7 @@ $(document).ready(function() {
         iconAnchor: [20, 20],
         popupAnchor: [0, -20]
     });
-    
+
     var geojsonLayer;
     var modal = "<a href='#get_modal_data_{}' class='btn btn-lg btn-success'data-toggle='modal'data-target='#basicModal'>Click to open Modal</a>";
 
@@ -86,7 +86,25 @@ $(document).ready(function() {
 						goodWidth)
 					var popup = layer.bindPopup(popupString);
 					popup.id = feature.properties.id;
-				}
+				},
+                pointToLayer: function(feature, latlng) {
+                	gender = String(feature.properties.gender)
+                	switch (gender) {
+                		case "M":
+                	        layerIcon = mToiletIcon;
+                	        break;
+                	    case "F":
+                	    	layerIcon = fToiletIcon;
+                	    	break;
+                	    default:
+                	        layerIcon = toiletIcon;
+                	        break;
+                	}
+	                return L.marker(latlng, {
+	                    icon: layerIcon,
+	                    riseOnHover: true
+	                });
+                }
 		    })
 		    geojsonLayer.addTo(map);
 		});
