@@ -19,6 +19,9 @@ def index(request):
     }
     return render(request, 'lavoratr/toilet.html', context)
 
+def registration(request):
+    return render(request, 'lavoratr/user_registration.html')
+
 def get_geojson(request):
     latest_toilet_list = Toilet.objects.all()
     serializer = ToiletSerializer(latest_toilet_list)
