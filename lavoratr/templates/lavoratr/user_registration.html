@@ -1,6 +1,7 @@
 {% extends "lavoratr/base.html" %}
 {% load static %}
 {% block extra_head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'lavoratr/user_registration.css' %}" />
 {% endblock %}
 
 {% block content %}
@@ -51,5 +52,6 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript" src="{% static 'lavoratr/user_registration.js' %}"></script>
 </div>
 {% endblock %}
