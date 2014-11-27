@@ -1,12 +1,14 @@
 from django.shortcuts import render, get_object_or_404
-from django.utils import timezone
+from django.utils import timezone, simplejson
 from django.contrib.gis.geos import Point
 from lavoratr.models import Toilet, Review
 from lavoratr.serializers import ToiletSerializer
 from lavoratr.forms import ToiletForm, ReviewForm
 from rest_framework.renderers import JSONRenderer
 from django.http import HttpResponseRedirect, HttpResponse
-
+from django.contrib.auth import authenticate, login as auth_login
+from django.contrib.auth.models import User
+from django.shortcuts import redirect
 
 def index(request):
     latest_toilet_list = Toilet.objects.all()
@@ -43,7 +45,38 @@ def modal_data(request, toilet_id):
     toilet_json = JSONRenderer().render(serializer.data)
     return HttpResponse(toilet_json, content_type = "application/json")
 
+def get_user(username):
+    try:
+        return User.objects.get(username=username)
+    except User.DoesNotExist:
+        return None
 
+def registration_submit(request):
+    if request.method == "POST":
+        email = request.POST['InputEmail']
+        username = request.POST['InputUsername']
+        password = request.POST['InputPassword']
+        password_two = request.POST['InputPasswordConfirm']
+        user = get_user(username)
+        if password == password_two:
+            if user is None:
+                user = User.objects.create_user(username, email, password)
+                user.save()
+                user = authenticate(username=user, password=password)
+                #login
+                return redirect('/')
+            else:
+                #messages
+                print "User already exists"
+                to_json = {"failed": "failed"}
+                json = simplejson.dumps(to_json)
+                return HttpResponse(json, mimetype='application/json')
+        else:
+            #messages
+            print "User already exists"
+            to_json = {"failed": "failed"}
+            json = simplejson.dumps(to_json)
+            return HttpResponse(json, mimetype='application/json')
 
 def add_review(request, toilet_id):
     toilet = get_object_or_404(Toilet, id=toilet_id)
