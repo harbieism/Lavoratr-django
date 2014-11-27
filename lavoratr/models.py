@@ -1,5 +1,6 @@
 from django.contrib.gis.db import models
 from django.core.exceptions import ValidationError
+from django.contrib.auth.models import User
 
 
 MALE = 'M'
@@ -45,6 +46,7 @@ class Toilet(models.Model):
 
 
 class Review(models.Model):
+    user = models.ForeignKey(User)
     toilet = models.ForeignKey(Toilet)
     rating = models.IntegerField()
     comment_box = models.CharField(max_length=127, blank=True)
