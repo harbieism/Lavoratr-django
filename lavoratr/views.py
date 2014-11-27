@@ -10,6 +10,7 @@ from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
 
+
 def index(request):
     latest_toilet_list = Toilet.objects.all()
     serializer = ToiletSerializer(latest_toilet_list)
@@ -21,18 +22,25 @@ def index(request):
     }
     return render(request, 'lavoratr/toilet.html', context)
 
+
 def registration(request):
     return render(request, 'lavoratr/user_registration.html')
 
+
 def login(request):
     return render(request, 'lavoratr/user_login.html')
+
+
+def login_submit(request):
+    username = request.POST['InputUsername']
 
 
 def get_geojson(request):
     latest_toilet_list = Toilet.objects.all()
     serializer = ToiletSerializer(latest_toilet_list)
     toilets_json = JSONRenderer().render(serializer.data)
-    return HttpResponse(toilets_json, content_type = "application/json")
+    return HttpResponse(toilets_json, content_type="application/json")
+
 
 def detail(request, toilet_id):
     toilet = get_object_or_404(Toilet, id=toilet_id)
@@ -43,17 +51,20 @@ def detail(request, toilet_id):
         {'toilet': toilet, 'reviews': reviews}
     )
 
+
 def modal_data(request, toilet_id):
     toilet = get_object_or_404(Toilet, id=toilet_id)
     serializer = ToiletSerializer(toilet)
     toilet_json = JSONRenderer().render(serializer.data)
-    return HttpResponse(toilet_json, content_type = "application/json")
+    return HttpResponse(toilet_json, content_type="application/json")
+
 
 def get_user(username):
     try:
         return User.objects.get(username=username)
     except User.DoesNotExist:
         return None
+
 
 def registration_submit(request):
     if request.method == "POST":
@@ -67,20 +78,18 @@ def registration_submit(request):
                 user = User.objects.create_user(username, email, password)
                 user.save()
                 user = authenticate(username=user, password=password)
-                #login
                 return redirect('/')
             else:
-                #messages
                 print "User already exists"
                 to_json = {"failed": "failed"}
                 json = simplejson.dumps(to_json)
                 return HttpResponse(json, mimetype='application/json')
         else:
-            #messages
             print "User already exists"
             to_json = {"failed": "failed"}
             json = simplejson.dumps(to_json)
             return HttpResponse(json, mimetype='application/json')
+
 
 def add_review(request, toilet_id):
     toilet = get_object_or_404(Toilet, id=toilet_id)
