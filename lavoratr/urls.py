@@ -27,6 +27,8 @@ urlpatterns = patterns(
     url(r'^submit_review/$', views.submit_review, name='submit_review'),
     url(r'^get.geojson.js$', views.get_geojson, name='get_geojson'),
     url(r'^registration$', views.registration, name='registration'),
+    url(r'^login$', views.login, name='login'),
+    url(r'^logil_submit$', views.login_submit, name='login_submit'),
     url(
         r'^registration_submit$',
         views.registration_submit,
